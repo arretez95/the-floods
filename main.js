@@ -2358,14 +2358,12 @@ function equipItem(itemId, preferredSlot = null) {
 	let slot = preferredSlot && slots.includes(preferredSlot) ?  preferredSlot : slots.find(s => gameData.equipped[s] === null)
 	
 	if (!slot) return
-	
-	unequipItem(slot)
 
 	inv[itemId] -= 1
 	gameData.equipped[slot] = itemId
 	
-	renderUnequipBtn(slot)
 	recalcEquipmentEffects()
+	renderEquippableList(slot)
 	renderEquipment()
 }
 
@@ -2378,6 +2376,7 @@ function unequipItem(slot) {
 	
 	gameData.equipped[slot] = null
 	recalcEquipmentEffects()
+	renderEquipment()
 }
 
 function recalcEquipmentEffects() {
@@ -2424,22 +2423,29 @@ function onEquipmentSlotClick(slot) {
 	renderEquippableList(slot, getEquippableItemsForSlot(slot))
 }
 
+function onEquipmentSlotHover(slot) {
+	selectedEquipSlot = slot
+
+	document.querySelectorAll('.equip-slot').forEach(el => {
+		el.classList.toggle('selected', el.dataset.slot === slot)
+	})
+
+	renderUnequipBtn(slot)
+}
+
 function renderEquippableList(slot) {
 	const container = document.getElementById('equip-select')
 	container.innerHTML = ''
 	
 	const inv = gameData.inventory.equipment
 	
-	const items = Object.entries(inv)
-	.filter(([itemId, qty]) => {
+	const items = Object.entries(inv).filter(([itemId, qty]) => {
 		if (qty <= 0) return false
 		
 		const def = item_master_data[itemId]
 		if (!def || def.type !== 'equipment') return false
 		
-		const slots = Array.isArray(def.equipSlot)
-		? def.equipSlot
-		: [def.equipSlot]
+		const slots = Array.isArray(def.equipSlot) ? def.equipSlot : [def.equipSlot]
 		
 		return slots.includes(slot)
 	})
@@ -2454,7 +2460,6 @@ function renderEquippableList(slot) {
 		`<div style="padding:1em 0; font-style: italic;">No equippable items.</div>`
 		return
 	}
-
 
 	items.forEach(([itemId, qty]) => {
 		const el = createInventoryItemElement(itemId, qty, () => {
@@ -2471,16 +2476,18 @@ function renderUnequipBtn(slot) {
 	if (!itemId) return
 
 	const container = $('.equip-slot.selected');
+	if (container.querySelector('.unequip-btn')) return
 
 	const unequipBtn = document.createElement("button");
 	unequipBtn.classList.add("unequip-btn");
 	unequipBtn.textContent = "Unequip";	
+	unequipBtn.addEventListener("click", () => {
+		unequipItem(slot)
+		renderEquippableList(slot)
+	})
 
 	container.appendChild(unequipBtn);
 }
-
-
-
 
 
 // ================================
@@ -2546,12 +2553,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	document.querySelectorAll('.equip-slot').forEach(el => {
 		el.addEventListener('click', () => {
-			onEquipmentSlotClick(el.dataset.slot)
+			if (!el.classList.contains("selected")) {
+				onEquipmentSlotClick(el.dataset.slot)
+			}
 		})
+		el.addEventListener('mouseenter', () => {
+			renderUnequipBtn(el.dataset.slot)
+		})
+		el.addEventListener('mouseleave', () => {
+			el.querySelector('.unequip-btn')?.remove()
+		})
+
 	})
 	
 	document.querySelectorAll('.attr-add').forEach(btn => {
 		btn.addEventListener('click', attrUp);
 	});
-	
+
 });

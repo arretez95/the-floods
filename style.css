@@ -993,10 +993,12 @@ Stats Panel
 }
 
 .unequip-btn {
+	position: relative;
 	top: -50%;
 	font-size: 1em;
 	padding: 0.5em 1em;
 	cursor: pointer;
+	z-index: 1;
 }
 
 #equipment-list img {
