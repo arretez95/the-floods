@@ -78,7 +78,7 @@ var gameData = {
 	},
 	research: {
 		// Earn one skill point per level up.
-		points: 5,
+		points: 0,
 		complete: {},
 		researchUnlocked: {},
 	},
