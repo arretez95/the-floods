@@ -593,6 +593,10 @@ Explore
 	margin-left: auto;
 }
 
+.loot-table {
+	background: red;
+}
+
 /* =================================
 Crafts
 =================================*/

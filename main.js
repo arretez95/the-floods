@@ -498,6 +498,7 @@ const craftRecipes = {
 	'simple_hatchet': {
 		requires: {
 			wood: 5,
+			stone: 1,
 		},
 		quantity: 1,
 		unlock: {
@@ -509,6 +510,7 @@ const craftRecipes = {
 	'simple_hammer': {
 		requires: {
 			wood: 5,
+			stone: 1,
 		},
 		quantity: 1,
 		unlock: {
@@ -1370,7 +1372,7 @@ function insertExploreAreas() {
 function exploreStart(e) {
 	const id = e.currentTarget.dataset.area;
 	
-	const explorePanel = document.getElementById("explore");
+	const explorePanel = $("#explore");
 	const el = buildExploreElement(id);
 	
 	if (el) explorePanel.appendChild(el);
@@ -1380,7 +1382,7 @@ function exploreStart(e) {
 		removeEl[0].parentNode.removeChild(removeEl[0])
 	}
 	
-	document.getElementById('continue').focus()
+	$('#continue').focus()
 }
 
 function buildExploreElement(id) {
@@ -1406,7 +1408,6 @@ function buildExploreElement(id) {
 	const options = document.createElement('div')
 	options.classList.add("explore-options");
 	
-	
 	// Continue
 	const continueBtn = document.createElement('li')
 	continueBtn.classList.add('item-content')
@@ -1415,7 +1416,7 @@ function buildExploreElement(id) {
 	
 	continueBtn.innerHTML = `
 		<img src="/images/foot.png">
-		<div class="consumable-name">Continue</div>
+		<div class="consumable-name"><u>C</u>ontinue</div>
 		<div class="consumable-qty">${gameData.explore.stamina} / ${gameData.explore.staminaMax}</div>
 	`
 	
@@ -1461,6 +1462,12 @@ function buildExploreElement(id) {
 		
 		itemsList.appendChild(buildConsumableButton(itemId));
 	});
+
+	// Loot table
+	const lootTableList =  document.createElement("div")
+	lootTableList.classList.add("loot-table")
+
+	
 	
 	options.appendChild(continueBtn)
 	options.appendChild(itemsList)
