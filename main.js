@@ -2480,7 +2480,7 @@ function renderUnequipBtn(slot) {
 
 	const unequipBtn = document.createElement("button");
 	unequipBtn.classList.add("unequip-btn");
-	unequipBtn.textContent = "Unequip";	
+	unequipBtn.textContent = `Unequip ${titleCase(item_master_data[itemId].name)}`;	
 	unequipBtn.addEventListener("click", () => {
 		unequipItem(slot)
 		renderEquippableList(slot)

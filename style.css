@@ -999,6 +999,7 @@ Stats Panel
 	padding: 0.5em 1em;
 	cursor: pointer;
 	z-index: 1;
+	background: var(--background);
 }
 
 #equipment-list img {
