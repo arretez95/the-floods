@@ -813,29 +813,31 @@ let tickTimer = null;
 let stamTimer = null;
 let lastCraftUpdate = 0
 
+const $ = (selector) => { return document.querySelector(selector) };
+
 const DOM = {
-	waterAmount: () => document.getElementById('water-amount'),
-	waterProdRate: () => document.getElementById('water-prod-rate'),
-	waterTick: () => document.getElementById('water-tick'),
-	xpAmount: () => document.getElementById('xp-amount'),
-	waterLevel: () => document.getElementById('water-level'),
-	water: () => document.getElementById('water'),
-	totalWater: () => document.getElementById('total-water'),
-	waterSpent: () => document.getElementById('water-spent'),
-	
-	exploreLevel: () => document.getElementById('explore-level'),
-	exploreXpAmount: () => document.getElementById('explore-xp-amount'),
-	
-	craftLevel: () => document.getElementById('crafts-level'),
-	craftXpAmount: () => document.getElementById('crafts-xp-amount'),
-	
-	researchPts: () => document.getElementById('research-points-short'),
-	research: () => document.getElementById('research-points'),
-	
-	inventory: () => document.querySelector('#inv'),
-	inventoryItems: () => document.querySelector('#inventory-list'),
-	
-	attributesHeader: () => document.querySelector('#attributes .colheader'),
+	waterAmount: () => $('#water-amount'),
+	waterProdRate: () => $('#water-prod-rate'),
+	waterTick: () => $('#water-tick'),
+	xpAmount: () => $('#xp-amount'),
+	waterLevel: () => $('#water-level'),
+	water: () => $('#water'),
+	totalWater: () => $('#total-water'),
+	waterSpent: () => $('#water-spent'),
+
+	exploreLevel: () => $('#explore-level'),
+	exploreXpAmount: () => $('#explore-xp-amount'),
+
+	craftLevel: () => $('#crafts-level'),
+	craftXpAmount: () => $('#crafts-xp-amount'),
+
+	researchPts: () => $('#research-points-short'),
+	research: () => $('#research-points'),
+
+	inventory: () => $('#inv'),
+	inventoryItems: () => $('#inventory-list'),
+
+	attributesHeader: () => $('#attributes .colheader'),
 };
 
 function requestRender() {
@@ -2362,6 +2364,7 @@ function equipItem(itemId, preferredSlot = null) {
 	inv[itemId] -= 1
 	gameData.equipped[slot] = itemId
 	
+	renderUnequipBtn(slot)
 	recalcEquipmentEffects()
 	renderEquipment()
 }
@@ -2413,7 +2416,7 @@ let selectedEquipSlot = null
 
 function onEquipmentSlotClick(slot) {
 	selectedEquipSlot = slot
-	
+
 	document.querySelectorAll('.equip-slot').forEach(el => {
 		el.classList.toggle('selected', el.dataset.slot === slot)
 	})
@@ -2463,6 +2466,18 @@ function renderEquippableList(slot) {
 	})
 }
 
+function renderUnequipBtn(slot) {
+	const itemId = gameData.equipped[slot]
+	if (!itemId) return
+
+	const container = $('.equip-slot.selected');
+
+	const unequipBtn = document.createElement("button");
+	unequipBtn.classList.add("unequip-btn");
+	unequipBtn.textContent = "Unequip";	
+
+	container.appendChild(unequipBtn);
+}
 
 
 
