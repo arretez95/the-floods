@@ -1222,14 +1222,13 @@ function payUpgradeCost(cost) {
 	}
 }
 
-
 function purchaseUpgrade(id) {
 	if (!gameData.water.upgradesUnlocked[id]) return
 	
 	const def = upgradeDefs[id]
 	const level = gameData.water.upgrades[id].level
 	
-	if (level >= def.maxLevel) return
+	if (level >= def.maxLevel && def.maxLevel != null ) return
 	
 	const cost = getUpgradeCost(id)
 	if (!canAffordUpgrade(cost)) return
