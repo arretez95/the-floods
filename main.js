@@ -140,7 +140,7 @@ const upgradeDefs = {
 			}
 		],
 		unlock: (state) => state.amount >= 0,
-		maxLevel: 20,
+		maxLevel: null,
 	},
 	'toilet-flapper': {
 		name: "Insecure Toilet Flap",
@@ -886,6 +886,7 @@ function renderXP() {
 		DOM.researchPts().innerHTML = `${Math.floor(gameData.research.points)}`
 	} else {
 		DOM.researchPts().innerHTML = ''
+		DOM.researchPts().style.background = 'transparent';
 	}
 	
 	DOM.research().textContent = "Research Points: " + Math.floor(gameData.research.points) ?? '';
