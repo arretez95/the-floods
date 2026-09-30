@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Noah's Revenge - An Incremental Game. Your goal? Flood the world.">
+	<meta name="author" content="Thomassen">
+	<title>Noah's Revenge</title>
+	<link rel="stylesheet" href="style.css?v1.2">
+	
+	<script src="main.js"></script>
+	<noscript>This site requires JavaScript!</noscript>
+	
+</head>
+<body>
+	<div class="main-container">
+		<div class="sidebar">
+			<div class="resource">
+				<div id="water-prod-rate" title=""></div>
+				<div id="water-amount">
+					&nbsp;
+				</div>
+				<div id="water-container"></div>
+			</div>
+			<button id="nav-water" data-tab="water" class="nav button active fold ">
+				Home
+				<span class="nav-level" id="water-level">Lv. 1</span>
+				<div id="xp">
+					<div id="xp-amount"></div>
+				</div>
+			</button>
+			<button id="nav-explore" data-tab="explore" class="nav button fold">
+				Explore
+				<span class="nav-level" id="explore-level">Lv. 1</span>
+				<div id="explore-xp">
+					<div id="explore-xp-amount"></div>
+				</div>
+			</button>
+			<button id="nav-craft" data-tab="crafts" class="nav button fold">
+				Craft
+				<span class="nav-level" id="crafts-level">Lv. 1</span>
+				<div id="crafts-xp">
+					<div id="crafts-xp-amount"></div>
+				</div>
+			</button>
+			<button id="nav-research" data-tab="research" class="nav button fold">
+				Research
+				<span></span>
+				<div class="nav-level" id="research-points-short"></div>
+			</button>
+			<button id="nav-equip" data-tab="quest" class="nav button fold">Quests</button>
+			<button id="nav-achieve" data-tab="achievements" class="nav button fold">Achievements</button>
+		</div>
+		<div class="game-container">
+			<div class="game-panel">
+				<div class="tab-panel active" id="water">
+				</div>
+				<div class="tab-panel" id="explore">
+				</div>
+				<div class="tab-panel" id="crafts">
+					<div class="craft-console">
+						Select an item to start crafting!
+					</div>
+				</div>
+				<div class="tab-panel" id="research">
+					<div class="colheader" id="research-points">Research Points: 0</div>
+				</div>
+				<div class="tab-panel" id="trackers">
+					<!-- Unlocks at Level 10. Trackers are people coming after you for crimes against humanity. Escape them or engage them in combat. You have five attempts to avoid capture. If you get caught, game over. -->
+					<div id="tracker1">
+						Utility Worker
+						Lv. 1
+						Escape Chance: 90%;
+					</div>
+					
+				</div>
+				<div class="tab-panel" id="achievements">
+					<div id="achievement-list" class="upgrade-list">
+						<p>Total Water Produced: <span id="total-water"></span></p>
+						<p>Total Water Spent: <span id="water-spent"></span></p>
+						<p>Water Production Rate: <span id="water-tick"></span></p>
+						
+						<br>
+						
+						<div id="first-drop-achievement">
+							<h3>Nothing on the Water Meter</h3>
+							<p>Produce your first milliter of water.</p>
+							<span class="achievement-status">Locked</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="stats-panel">
+				<div class="menu">
+					<button class="menu-tab up" data-menu="inv">
+						<h4><img src="/images/backpack.png"></h4>
+					</button>
+					<button class="menu-tab" data-menu="equip">
+						<h4><img src="/images/swords.png"></h4>
+					</button>
+				</div>
+				
+				<div class="menu-item up" id="inv">
+					<div id="inventory-list"></div>
+				</div>
+				<div class="menu-item" id="equip">
+					Equipment List
+					<div id="equipment-list">
+						<div class="equip-slot" data-slot="BACK">Back</div>
+						<div class="equip-slot" data-slot="HEAD">Head</div>
+						<div class="equip-slot" data-slot="SHOULDERS">Shoulders</div>
+						<div class="equip-slot" data-slot="MAINHAND">Main</div>
+						<div class="equip-slot" data-slot="CHEST">Chest</div>
+						<div class="equip-slot" data-slot="OFFHAND">Offhand</div>
+						<div class="equip-slot" data-slot="GLOVES">Gloves</div>
+						<div class="equip-slot" data-slot="LEGS">Legs</div>
+						<div class="equip-slot" data-slot="ACCESSORY">Accessory</div>
+						<div class="equip-slot" data-slot="TRINKET">Trinket</div>
+						<div class="equip-slot" data-slot="FEET">Feet</div>
+						<div class="equip-slot" data-slot="TRINKET">Trinket</div>
+					</div>
+					<div id="equip-select"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
