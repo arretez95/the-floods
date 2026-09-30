@@ -485,7 +485,7 @@ const item_master_data = {
 	'simple_hammer': {
 		name: 'simple hammer',
 		type: 'equipment',
-		icon: 'axe.png',
+		icon: 'hammer.svg',
 		desc: 'A little goes a long way. Crafting Speed +15%',
 		sell: 50,
 		xp: 20,
