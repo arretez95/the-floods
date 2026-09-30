@@ -2353,9 +2353,7 @@ function equipItem(itemId, preferredSlot = null) {
 	? def.equipSlot
 	: [def.equipSlot]
 	
-	let slot = preferredSlot && slots.includes(preferredSlot)
-	? preferredSlot
-	: slots.find(s => gameData.equipped[s] === null)
+	let slot = preferredSlot && slots.includes(preferredSlot) ?  preferredSlot : slots.find(s => gameData.equipped[s] === null)
 	
 	if (!slot) return
 	
@@ -2405,9 +2403,7 @@ function getEquippableItemsForSlot(slot) {
 		const def = item_master_data[itemId]
 		if (!def || def.type !== 'equipment') continue
 		
-		const slots = Array.isArray(def.equipSlot)
-		? def.equipSlot
-		: [def.equipSlot]
+		const slots = Array.isArray(def.equipSlot) ? def.equipSlot : [def.equipSlot]
 		
 		if (slots.includes(slot)) {
 			result.push(itemId)
