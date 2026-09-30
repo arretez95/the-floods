@@ -78,7 +78,7 @@ var gameData = {
 	},
 	research: {
 		// Earn one skill point per level up.
-		points: 1,
+		points: 5,
 		complete: {},
 		researchUnlocked: {},
 	},
@@ -527,7 +527,7 @@ const researchDefs = {
 		desc: "Reduces research cost for all research.",
 		max: 99,
 		cost: level => level === 0 ? 5 : Math.pow(level, 3.15) + 1,
-		duration: level => level === 0 ? duration({m: 10}) : duration({ m: 10 * Math.pow(level, 3) }),
+		duration: level => level === 0 ? duration({m: 10}) : duration({ m: 10 * Math.pow(level, 2) }),
 		effect: (state, level) => state.researchCostReduction = Math.max(0.004, level * 0.004),
 		effectText: level => level === 0 ? '0.00x' : `${(Math.max(0.004, level * 0.004)).toFixed(3)}x`,
 		unlock: () => gameData.water.level >= 30,
@@ -569,7 +569,7 @@ const researchDefs = {
 		desc: 'Increase water drop amount.',
 		max: 99,
 		cost: level => level === 0 ? 1 : Math.ceil(1 + Math.pow(level, 1.1)),
-		duration: level => duration({m: Math.pow(level + 1, 2.54) }),
+		duration: level => duration({s: Math.pow(level + 1, 2.54) }),
 		effect: (state, level) => tickMult = 1 + (level * 0.02),
 		effectText: level => (1 + (level * 0.02)).toFixed(2) + 'x',
 		unlock: () => gameData.water.level >= 1,
@@ -2101,7 +2101,7 @@ function buildResearchElement(id) {
 }
 
 function insertResearchItems() {
-	const researchPanel = document.getElementById('research')
+	const researchPanel = $('#research')
 	
 	const sections = {}
 	
@@ -2223,19 +2223,21 @@ function finishResearch(id) {
 	
 	const el = document.querySelector(`[data-research-id="${id}"]`)
 	const levelEl = el.querySelector('.research-name')
+	const descEl = el.querySelector('.research-desc')
 	const durEl = el.querySelector('.research-time')
 	const costEl = el.querySelector('.research-cost')
 	const progressEl = el.querySelector('.progress-bar')
 	
 	levelEl.textContent = def.name + " - Lv. " + data.level
+	descEl.innerHTML = `${def.desc}<br>${def.effectText ? def.effectText(data.level) + ' -> ': ''} ${def.effectText ? def.effectText(data.level + 1): ''}`
 	durEl.textContent = msToHMS(def.duration(data.level) * Math.max(0.1, 1 - (gameData.durationMultiplier ?? 0)));
 	costEl.innerHTML = `${getResearchCost(id).amount}&nbsp;RP`
 	progressEl.style.width = "0%"
 	
 	gameData.research.active = null
 	
+	$(".progress-div").remove()
 	updateResearchButtons()
-	insertResearchItems()
 	requestRender()
 }
 
