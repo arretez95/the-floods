@@ -822,9 +822,10 @@ Stats Panel
 }
 
 .menu-tab.up, .menu-tab:hover {
-	transform: translate(0, 0) scaleX(1.2);
+	transform: translate(0, 0) scaleX(1.25);
 	transform-origin: left;
 	color: white;
+	border-right: 0.5em solid gold;
 }
 
 .menu-item {
@@ -992,9 +993,9 @@ Stats Panel
 }
 
 .unequip-btn {
-	margin-top: 2px;
-	font-size: 0.7em;
-	padding: 2px 4px;
+	top: -50%;
+	font-size: 1em;
+	padding: 0.5em 1em;
 	cursor: pointer;
 }
 

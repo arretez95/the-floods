@@ -2357,12 +2357,8 @@ function equipItem(itemId, preferredSlot = null) {
 	
 	if (!slot) return
 	
-	// Unequip existing item
-	const oldItem = gameData.equipped[slot]
-	if (oldItem) {
-		inv[oldItem] = (inv[oldItem] ?? 0) + 1
-	}
-	
+	unequipItem(slot)
+
 	inv[itemId] -= 1
 	gameData.equipped[slot] = itemId
 	
@@ -2417,7 +2413,7 @@ let selectedEquipSlot = null
 
 function onEquipmentSlotClick(slot) {
 	selectedEquipSlot = slot
-
+	
 	document.querySelectorAll('.equip-slot').forEach(el => {
 		el.classList.toggle('selected', el.dataset.slot === slot)
 	})
