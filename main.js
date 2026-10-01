@@ -101,7 +101,9 @@ var gameData = {
 			stone: 5,
 		},
 		consumables: {},
-		equipment: {},
+		equipment: {
+			'simple_hammer': 1,
+		},
 	},
 	mastery: {},
 	equipped: {
@@ -214,7 +216,7 @@ const upgradeDefs = {
 				}
 			}
 		],
-		unlock: (state) => state.level >= 5,
+		unlock: (state) => state.level >= 2,
 		unlockText: 'Reach Level 5',
 		maxLevel: 4,
 	},
