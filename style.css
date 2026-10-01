@@ -487,11 +487,12 @@ Explore
 
 
 .explore-text {
-	min-height: 30vh;
+	min-height: 20vh;
 	border: 2px solid black;
 	border-top: 0;
 	border-bottom: 2px dotted black;
 	padding: 1em;
+	padding-bottom: 0;
 	font-size: 1.2em;
 }
 
@@ -535,13 +536,16 @@ Explore
 	margin-left: auto;
 }
 
-.loot-table {
+.loot-container {
 	grid-column: span 2;
+	padding: 1em;
+}
+
+.loot-table {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 1vw;
-	background: red;
 }
 
 /* =================================
@@ -773,10 +777,15 @@ Stats Panel
 }
 
 .menu-tab.up, .menu-tab:hover {
-	transform: translate(0, 0) scaleX(1.25);
+	text-align: left;
+	transform: translate(0, 0) scaleX(1.1);
 	transform-origin: left;
 	color: white;
-	border-right: 0.5em solid gold;
+	box-shadow: 0.5em 0px 0px 0px gold;
+	filter: brightness(0.7);
+	& img {
+		filter: brightness(1);
+	}
 }
 
 .menu-item {
