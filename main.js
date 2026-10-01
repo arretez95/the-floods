@@ -87,7 +87,7 @@ var gameData = {
 	},
 	inventory: {
 		items: {
-			wood: 5,
+			wood: 15,
 			stone: 5,
 		},
 		consumables: {},
@@ -1819,7 +1819,7 @@ function tickStamina(now) {
 // ================================
 
 function insertCraftRecipes() {
-	const panel = document.getElementById('crafts')
+	const panel = $('#crafts')
 	if (!panel) return
 	
 	panel.innerHTML = ''
@@ -2061,7 +2061,7 @@ function updateCrafting(now) {
 		addItemToInventory(craft.id, craft.amount)
 		gameData.craft.proficiency[craft.id] = (gameData.craft.proficiency[craft.id] ?? 0) + craft.amount
 		
-		addItemToMastery(craft.id)
+		addItemToMastery(craft.id, craft.amount)
 		gainSkillXP('craft', itemDef.xp)
 		insertCraftRecipes()
 		gameData.crafting.active = null

@@ -666,6 +666,18 @@ Crafts
 	border-radius: inherit;
 }
 
+.cancel-craft {
+	background: #e0ac69;
+	margin-left: 1em;
+	padding: 0.25em;
+	color: #8d5524;
+	border-radius: 0.5em;
+	&:hover {
+		filter: brightness(1.15);
+		cursor: pointer;
+	}
+}
+
 /* =================================
 Research
 =================================*/
