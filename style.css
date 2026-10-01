@@ -738,14 +738,17 @@ Achievements
 }
 
 .item-mastery-item {
-	/* border: 1px solid red; */
+	margin: 1em 0;
+	padding: 1em;
+	width: fit-content;
+	outline: 1px solid black;
 	.inventory-name {
 		font-size: 1em;
 		display: block;
 		position: relative;
 		top: 1em;
-		height: auto;
-		padding: 0.5em;
+		height: 2lh;
+		padding: 0.5em 0;
 	}
 	.inventory-qty {
 		display: block;
@@ -753,15 +756,35 @@ Achievements
 		width: auto;
 		margin-top: 0.5em;
 	}
+	&:nth-child(odd) .inventory-item {
+		transform: rotate(-2.5deg);
+		background: var(--sticky-3);
+		border-bottom-left-radius: 25px 185px;
+		border-bottom-right-radius: 205px 20px;
+		border-top-left-radius: 25px 125px;
+		border-top-right-radius: 205px 15px;
+		&.fold {
+			background: 
+			linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.3) 0) no-repeat 100% 0 / 1.2em 1.2em,
+			linear-gradient(-135deg, transparent 1em, var(--sticky-1) 0);
+		}
+	}
+	&:nth-child(even) .inventory-item {
+		transform: rotate(2.5deg);
+		background: var(--sticky-4);
+		border-bottom-left-radius: 185px 25px;
+		border-bottom-right-radius: 20px 205px;
+		border-top-left-radius: 125px 25px;
+		border-top-right-radius: 15px 205px;
+		&.fold:nth-child(even) {
+			background: 
+			linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.3) 0) no-repeat 100% 0 / 1.2em 1.2em,
+			linear-gradient(-135deg, transparent 1em, var(--sticky-3) 0);
+			transform: rotate(3deg);
+		}
+	}
 }
 
-/* .item-mastery-item .inventory-name {
-	display: block;
-	position: relative;
-	top: 1em;
-	height: auto;
-	padding: 0.5em;
-} */
 
 /* =================================
 Stats Panel

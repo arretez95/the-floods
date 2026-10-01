@@ -98,6 +98,7 @@ var gameData = {
 	mastery: {
 		wood: 25,
 		stone: 1,
+		simple_hammer: 1,
 	},
 	equipped: {
 		BACK: null,
@@ -2333,7 +2334,6 @@ function insertItemAchievements() {
 		
 		const item = document.createElement('div');
 		item.classList.add('inventory-item', 'fold');
-		/* item.dataset.item = id; */
 		
 		const iconDiv = document.createElement('div');
 		iconDiv.classList.add('inventory-icon');
