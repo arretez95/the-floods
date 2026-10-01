@@ -2112,8 +2112,8 @@ function updateCrafting(now) {
 		
 		addItemToMastery(craft.id, craft.amount)
 		gainSkillXP('craft', itemDef.xp)
-		insertCraftRecipes()
 		gameData.crafting.active = null
+		insertCraftRecipes()
 		startNextCraft()
 		
 		if (!gameData.crafting.active && gameData.crafting.queue.length === 0) {
