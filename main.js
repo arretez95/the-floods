@@ -46,7 +46,9 @@ function initResearch(defs) {
 var gameData = {
 	player: {
 		name: 'Adri',
-	},
+		start: Date.now(),
+		latest: Date.now(),
+		},
 	unlocks: {
 		explore: false,
 		crafting: false,
