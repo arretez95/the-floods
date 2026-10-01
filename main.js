@@ -95,6 +95,7 @@ var gameData = {
 			simple_hatchet: 1,
 		},
 	},
+	mastery: {},
 	equipped: {
 		BACK: null,
 		HEAD: null,
@@ -1464,7 +1465,13 @@ function buildExploreElement(id) {
 	});
 
 	// Loot table
-	const lootTableList =  document.createElement("div")
+	const lootContainer =  document.createElement("div")
+	lootContainer.classList.add("loot-container")
+
+	const addText = document.createElement("h3")
+	addText.textContent = "Items found here..."
+	
+	const lootTableList = document.createElement("div")
 	lootTableList.classList.add("loot-table")
 
 	def.drops.forEach( ([itemId]) => {
@@ -1472,7 +1479,7 @@ function buildExploreElement(id) {
 
 		const item = document.createElement('div');
 		item.classList.add('inventory-item', 'fold');
-		item.dataset.item = itemDef;
+		/* item.dataset.item = itemDef; */
 		
 		const iconDiv = document.createElement('div');
 		iconDiv.classList.add('inventory-icon');
@@ -1491,12 +1498,15 @@ function buildExploreElement(id) {
 		lootTableList.appendChild(item);
 	})
 
+	lootContainer.appendChild(addText)
+	lootContainer.appendChild(lootTableList)
+
 	
 	options.appendChild(continueBtn)
 	options.appendChild(itemsList)
 	explorePanel.appendChild(console)
 	explorePanel.appendChild(options)
-	explorePanel.appendChild(lootTableList)
+	explorePanel.appendChild(lootContainer)
 }
 
 function sendExplore(id) {
@@ -2318,7 +2328,13 @@ function addItemToInventory(itemId, amount = 1) {
 	const bucket = bucketFn();
 	
 	bucket[itemId] = (bucket[itemId] ?? 0) + amount;
+}
+
+function addItemToMastery(itemId, amount = 1) {
+	const def = item_master_data[itemId];
+	if (!def) return;
 	
+	gameData.mastery[itemId] = (gameData.mastery[itemId] ?? 0) + amount;
 }
 
 function consumeItem(itemId, amount = 1) {
