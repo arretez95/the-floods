@@ -302,69 +302,7 @@ Sidebar
 	outline: 2px solid gray;
 	filter: brightness(1.2);
 }
-
-/* #nav-water {
-	&:hover, &:focus {
-		filter: brightness(1.2);
-	};
-	&.active {
-		background: rgb(var(--water));
-	}
-}
-
-#nav-explore {
-	&:hover, &:focus {
-		filter: brightness(1.2);
-	};
-	&.active {
-		background: rgb(var(--explore));
-	}
-}
-
-#nav-equip {
-	&:hover, &:focus {
-		filter: brightness(1.2);
-	};
-	&.active {
-		background: rgb(var(--equipment));
-	}
-}
-
-#nav-craft {
-	&:hover, &:focus {
-		filter: brightness(1.2);
-	};
-	&.active {
-		background: rgb(var(--crafts));
-	}
-}
-
-#nav-research {
-	&:hover, &:focus {
-		filter: brightness(1.2);
-	};
-	&.active {
-		background: rgb(var(--research));
-	}
-}
-
-#nav-trackers {
-	&:hover, &:focus {
-		filter: brightness(1.2);
-	};
-	&.active {
-		background: rgb(var(--trackers));
-	}
-}
-
-#nav-achieve {
-	&:hover, &:focus {
-		filter: brightness(1.2);
-	};
-	&.active {
-		background: rgb(var(--achievements));
-	}
-} */
+w
 
 .nav-level {
 	font-size: 0.75em;
