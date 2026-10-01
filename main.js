@@ -86,7 +86,10 @@ var gameData = {
 		// Future achievement implementations
 	},
 	inventory: {
-		items: {},
+		items: {
+			wood: 5,
+			stone: 5,
+		},
 		consumables: {},
 		equipment: {},
 	},
@@ -1646,7 +1649,7 @@ function generateLootTable(id) {
 		
 		const iconDiv = document.createElement('div');
 		iconDiv.classList.add('inventory-icon');
-		
+
 		const img = new Image();
 		
 		const nameDiv = document.createElement('div');
@@ -2055,10 +2058,10 @@ function updateCrafting(now) {
 	}
 	
 	if (now >= craft.finishAt) {
-		const inventory = INVENTORY_BUCKETS[itemDef.type]()
-		inventory[craft.id] = (inventory[craft.id] ?? 0) + craft.amount
+		addItemToInventory(craft.id, craft.amount)
 		gameData.craft.proficiency[craft.id] = (gameData.craft.proficiency[craft.id] ?? 0) + craft.amount
 		
+		addItemToMastery(craft.id)
 		gainSkillXP('craft', itemDef.xp)
 		insertCraftRecipes()
 		gameData.crafting.active = null
