@@ -239,7 +239,7 @@ const exploreDefs = {
 			['stone', 55.618],
 			['wood', 55.962],
 			['clover', 55.236],
-			['blueberry', 70.111],
+			['blueberry', 50.111],
 			['mushroom', 28.127],
 			['feather', 28.155],
 			['toy_bucket', 0.00089],
@@ -1467,12 +1467,36 @@ function buildExploreElement(id) {
 	const lootTableList =  document.createElement("div")
 	lootTableList.classList.add("loot-table")
 
-	
+	def.drops.forEach( ([itemId]) => {
+		const itemDef = item_master_data[itemId];
+
+		const item = document.createElement('div');
+		item.classList.add('inventory-item', 'fold');
+		item.dataset.item = itemDef;
+		
+		const iconDiv = document.createElement('div');
+		iconDiv.classList.add('inventory-icon');
+		const img = new Image();
+		img.src = `/images/${itemDef?.icon || ""}`;
+		iconDiv.appendChild(img);
+		
+		const nameDiv = document.createElement('div');
+		nameDiv.classList.add('inventory-name');
+		const name = itemDef?.name || id;
+		nameDiv.innerHTML = `<span>${name}</span>`;
+		
+		item.appendChild(iconDiv);
+		item.appendChild(nameDiv);
+		
+		lootTableList.appendChild(item);
+	})
+
 	
 	options.appendChild(continueBtn)
 	options.appendChild(itemsList)
 	explorePanel.appendChild(console)
 	explorePanel.appendChild(options)
+	explorePanel.appendChild(lootTableList)
 }
 
 function sendExplore(id) {
