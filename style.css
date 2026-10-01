@@ -539,7 +539,11 @@ Explore
 }
 
 .consumable-name {
-	padding-left: 5px;
+	padding: 0.5em;
+}
+
+.consumable-dur {
+	font-size: 0.75em;
 }
 
 .consumable-qty {
@@ -866,7 +870,7 @@ Stats Panel
 	& img {
 		width: 20px;
 		height: 20px;
-		filter: invert(1);
+		filter: invert(1) opacity(0.5);
 	}
 	&[data-menu="inv"] {
 		background: brown;
@@ -885,9 +889,8 @@ Stats Panel
 	transform-origin: left;
 	color: white;
 	box-shadow: 0.5em 0px 0px 0px gold;
-	filter: brightness(0.7);
 	& img {
-		filter: brightness(1);
+		filter: invert(1) opacity(1);
 	}
 }
 
