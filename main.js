@@ -2699,6 +2699,17 @@ function renderUnequipBtn(slot) {
 	container.appendChild(unequipBtn);
 }
 
+// ================================
+// 		OFFLINE BONUS
+// ================================
+
+// Every five minutes, update last play time (gameData.player.latest)
+// setTimeout( () => gameData.player.latest = Date.now(), duration({m:5}))
+// If first upgrade is purchased ()
+// 
+	// Calculate amount of time since last play (gameData.player.latest)
+	
+// 
 
 // ================================
 // 		GAME LOOP
