@@ -866,6 +866,9 @@ Stats Panel
 	&[data-menu="equip"] {
 		background: lightblue;
 	}
+	&[data-menu="help"] {
+		background: gray;
+	}
 }
 
 .menu-tab.up, .menu-tab:hover {
