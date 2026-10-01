@@ -887,6 +887,7 @@ function renderXP() {
 	
 	if (gameData.research.points >= 1) {
 		DOM.researchPts().innerHTML = `${Math.floor(gameData.research.points)}`
+		DOM.researchPts().style.background = '';
 	} else {
 		DOM.researchPts().innerHTML = ''
 		DOM.researchPts().style.background = 'transparent';
