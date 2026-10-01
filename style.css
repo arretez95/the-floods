@@ -102,7 +102,7 @@ Sidebar
 	padding: 0.75em;
 	min-width: 10vw;
 	max-width: 10vw;
-	gap: 1vw;
+	gap: 1.25vw;
 }
 
 /* Water Stuff */
@@ -294,13 +294,18 @@ Sidebar
 }
 
 .nav.fold.active {
-	border: 2px solid black;
+	outline: 2px solid black;
 	transform: rotate(0);
 }
 
-#nav-water {
+.nav:hover, .nav:focus {
+	outline: 2px solid gray;
+	filter: brightness(1.2);
+}
+
+/* #nav-water {
 	&:hover, &:focus {
-		background: rgba(var(--water), 0.5);
+		filter: brightness(1.2);
 	};
 	&.active {
 		background: rgb(var(--water));
@@ -309,7 +314,7 @@ Sidebar
 
 #nav-explore {
 	&:hover, &:focus {
-		background: rgba(var(--explore), 0.5);
+		filter: brightness(1.2);
 	};
 	&.active {
 		background: rgb(var(--explore));
@@ -318,7 +323,7 @@ Sidebar
 
 #nav-equip {
 	&:hover, &:focus {
-		background: rgba(var(--equipment), 0.5);
+		filter: brightness(1.2);
 	};
 	&.active {
 		background: rgb(var(--equipment));
@@ -327,7 +332,7 @@ Sidebar
 
 #nav-craft {
 	&:hover, &:focus {
-		background: rgba(var(--crafts), 0.5);
+		filter: brightness(1.2);
 	};
 	&.active {
 		background: rgb(var(--crafts));
@@ -336,7 +341,7 @@ Sidebar
 
 #nav-research {
 	&:hover, &:focus {
-		background: rgba(var(--research), 0.5);
+		filter: brightness(1.2);
 	};
 	&.active {
 		background: rgb(var(--research));
@@ -345,7 +350,7 @@ Sidebar
 
 #nav-trackers {
 	&:hover, &:focus {
-		background: rgba(var(--trackers), 0.5);
+		filter: brightness(1.2);
 	};
 	&.active {
 		background: rgb(var(--trackers));
@@ -354,12 +359,12 @@ Sidebar
 
 #nav-achieve {
 	&:hover, &:focus {
-		background: rgba(var(--achievements), 0.5);
+		filter: brightness(1.2);
 	};
 	&.active {
 		background: rgb(var(--achievements));
 	}
-}
+} */
 
 .nav-level {
 	font-size: 0.75em;
