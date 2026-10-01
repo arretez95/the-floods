@@ -102,7 +102,7 @@ Sidebar
 	padding: 0.75em;
 	min-width: 10vw;
 	max-width: 10vw;
-	height: 99vh;
+	height: 90vh;
 	gap: 1.25vw;
 	border-right: 1px solid black;
 }
@@ -1150,4 +1150,16 @@ Stats Panel
 
 .attr-add.visible {
 	displaY: inline;
+}
+
+/* =================================
+Footer
+=================================*/
+footer {
+	background: red;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0.5em 1em;
 }

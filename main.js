@@ -1142,7 +1142,6 @@ function showSidebarButton(skill) {
 	}
 }
 
-
 /* Water Upgrades */
 
 function buildUpgradeElement(id) {
