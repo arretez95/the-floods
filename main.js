@@ -11,7 +11,7 @@ function initUpgrades(defs) {
 		upgrades[key] = {
 			level: 0,
 			modifier: 1,
-		};
+		}
 	}
 	
 	return upgrades;
