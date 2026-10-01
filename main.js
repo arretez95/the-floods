@@ -769,9 +769,9 @@ function getInventoryCount(id) {
 function openPanel(e) {
 	const panel = e.currentTarget.dataset.tab;
 	
-	document.querySelectorAll('.active').forEach(el =>
+	document.querySelectorAll('.active').forEach(el => {
 		el.classList.remove('active')
-	);
+	});
 	
 	e.currentTarget.classList.add('active');
 	document.getElementById(panel).classList.add('active');
@@ -1462,6 +1462,7 @@ function buildExploreElement(id) {
 	continueBtn.innerHTML = `
 		<img src="/images/foot.png">
 		<div class="consumable-name"><u>C</u>ontinue</div>
+		<div class="consumable-dur"></div>
 		<div class="consumable-qty">${gameData.explore.stamina} / ${gameData.explore.staminaMax}</div>
 	`
 	
@@ -1639,7 +1640,7 @@ function sendExplore(id) {
 	}
 	
 	// update Continue stamina
-	document.getElementById("continue").children[2].textContent =
+	$("#continue").children[3].textContent =
 	`${gameData.explore.stamina} / ${gameData.explore.staminaMax}`;
 	generateLootTable(id);
 	requestRender();
@@ -1694,7 +1695,7 @@ function generateLootTable(id) {
 		let name = ''
 
 		if (mastery == 0 ) {
-			img.src = `/images/question-mark-light.png`;
+			img.src = `/images/question-mark.png`;
 			name = '???'
 		} else {
 			img.src = `/images/${itemDef?.icon || ""}`;
@@ -1800,14 +1801,14 @@ function useExploreConsumable(itemId) {
 	gameData.inventory.consumables[itemId]--;
 	
 	// === UPDATE CONTINUE BUTTON STAMINA ===
-	const continueBtn = document.getElementById("continue");
+	const continueBtn = $("#continue");
 	if (continueBtn) {
 		continueBtn.children[2].textContent =
 		`${gameData.explore.stamina} / ${gameData.explore.staminaMax}`;
 	}
 	
 	// === UPDATE CONSUMABLE QTY ===
-	const consumQty = document.querySelector(
+	const consumQty = $(
 		`.item-content[data-item="${itemId}"] .consumable-qty`
 	);
 	const consumEl = document.querySelector(`li[data-item="${itemId}"]`);
@@ -1834,19 +1835,27 @@ function useExploreConsumable(itemId) {
 
 function tickStamina(now) {
 	const explore = gameData.explore
-	
-	if (explore.stamina >= explore.staminaMax) return
-	
-	if (now - explore.staminaTick < duration({ m: 10 })) return
-	
-	explore.staminaTick = now
-	
-	explore.stamina = clamp(explore.stamina + 20, 0, explore.staminaMax)
-	
-	// update stamina UI
-	const el = document.getElementById('continue')
+	const staminaInterval = duration({ m: 1 })
+	const el = $('#continue')
+
+	if (explore.stamina >= explore.staminaMax) {
+		if (el) {
+			el.querySelector('.consumable-dur').textContent = ''
+		}
+		return
+	}
+
+	const elapsed = now - explore.staminaTick
+	const remaining = staminaInterval - elapsed
+
+	if (elapsed >= staminaInterval) {
+		explore.staminaTick = now
+		explore.stamina = clamp(explore.stamina + 4, 0, explore.staminaMax)
+	}
+
 	if (el) {
-		el.children[2].textContent = `${explore.stamina} / ${explore.staminaMax}`
+		el.querySelector('.consumable-dur').textContent = ` (${msToHMS(Math.max(0, remaining))})`
+		el.querySelector('.consumable-qty').textContent = `${explore.stamina} / ${explore.staminaMax}`
 	}
 }
 
