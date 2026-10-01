@@ -47,6 +47,13 @@ var gameData = {
 	player: {
 		name: 'Adri',
 	},
+	unlocks: {
+		explore: false,
+		crafting: false,
+		research: false,
+		trackers: false,
+		achievements: false,
+	},
 	water: {
 		level: 1,
 		xp: 0,
@@ -771,9 +778,9 @@ function openPanel(e) {
 	
 	switch (panel) {
 		case 'explore':
-		insertExploreAreas();
+			insertExploreAreas();
 		case 'crafts':
-		insertCraftRecipes();
+			insertCraftRecipes();
 	}
 }
 
@@ -1101,8 +1108,38 @@ function levelUpSkill(skill) {
 		case 'explore':
 		data.stamina += data.staminaMax
 	}
-	
+	unlockSkill();
 	requestRender();
+}
+
+const UNLOCK_REQUIREMENTS = {
+	explore: () => gameData.water.level >= 3,
+	crafting: () => gameData.explore.level >= 3,
+	research: () =>
+		gameData.water.level >= 2 &&
+		gameData.explore.level >= 2 &&
+		gameData.craft.level >= 2,
+	trackers: () => gameData.water.level >= 10,
+	achievements: () => gameData.explore.level >= 5,
+}
+
+function unlockSkill() {
+	for (const [skill, requirement] of Object.entries(UNLOCK_REQUIREMENTS)) {
+		if (gameData.unlocks[skill]) continue
+
+		if (requirement()) {
+			gameData.unlocks[skill] = true
+			showSidebarButton(skill)
+		}
+	}
+}
+
+function showSidebarButton(skill) {
+	const button = $(`button[data-tab="${skill}"]`)
+
+	if (button) {
+		button.classList.toggle('invisible')
+	}
 }
 
 

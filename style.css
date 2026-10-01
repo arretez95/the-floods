@@ -107,6 +107,14 @@ Sidebar
 	border-right: 1px solid black;
 }
 
+.visible {
+	visibility: visible;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
 /* Water Stuff */
 .resource {
 	margin: 0 auto;
