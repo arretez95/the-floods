@@ -60,6 +60,7 @@ var gameData = {
 		amount: DROP_ML, //counts in mL; current amount of flooding water
 		waterTotal: 0, //total water flooded over time
 		waterPerTick: 0, //in mL; 0.05 mL = 1 drop
+		tickMult: 1,
 		tickSpeed: 9E9,
 		totalWaterSpent: 0,
 		upgrades: {},
@@ -578,7 +579,7 @@ const researchDefs = {
 		max: 99,
 		cost: level => level === 0 ? 1 : Math.ceil(1 + Math.pow(level, 1.1)),
 		duration: level => duration({s: Math.pow(level + 1, 2.54) }),
-		effect: (state, level) => tickMult = 1 + (level * 0.02),
+		effect: (state, level) => state.tickMult = 1 + (level * 0.02),
 		effectText: level => (1 + (level * 0.02)).toFixed(2) + 'x',
 		unlock: () => gameData.water.level >= 1,
 	},
@@ -779,7 +780,7 @@ function openPanel(e) {
 	switch (panel) {
 		case 'explore':
 			insertExploreAreas();
-		case 'crafts':
+		case 'craft':
 			insertCraftRecipes();
 	}
 }
@@ -1065,8 +1066,9 @@ function recalcStats() {
 }
 
 function waterDrop() {
-	gameData.water.waterTotal += gameData.water.waterPerTick;
-	gameData.water.amount += gameData.water.waterPerTick;
+	const water = gameData.water
+	water.waterTotal += water.waterPerTick;
+	water.amount += water.waterPerTick * water.tickMult;
 }
 
 function getDropsPerTick() {
@@ -1114,12 +1116,12 @@ function levelUpSkill(skill) {
 
 const UNLOCK_REQUIREMENTS = {
 	explore: () => gameData.water.level >= 3,
-	crafting: () => gameData.explore.level >= 3,
+	craft: () => gameData.explore.level >= 3,
 	research: () =>
 		gameData.water.level >= 2 &&
 		gameData.explore.level >= 2 &&
 		gameData.craft.level >= 2,
-	trackers: () => gameData.water.level >= 10,
+	trackers: () => gameData.water.level >= 50,
 	achievements: () => gameData.explore.level >= 5,
 }
 
@@ -1129,6 +1131,7 @@ function unlockSkill() {
 
 		if (requirement()) {
 			gameData.unlocks[skill] = true
+			console.log(`${skill} unlocked!`)
 			showSidebarButton(skill)
 		}
 	}
@@ -1865,7 +1868,7 @@ function tickStamina(now) {
 // ================================
 
 function insertCraftRecipes() {
-	const panel = $('#crafts')
+	const panel = $('#craft')
 	if (!panel) return
 	
 	panel.innerHTML = ''
