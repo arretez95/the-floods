@@ -95,7 +95,10 @@ var gameData = {
 			simple_hatchet: 1,
 		},
 	},
-	mastery: {},
+	mastery: {
+		wood: 25,
+		stone: 1,
+	},
 	equipped: {
 		BACK: null,
 		HEAD: null,
@@ -1020,6 +1023,10 @@ if (el) el.textContent = v;
 function renderAchievements() {
 	DOM.totalWater().textContent = waterUnit(gameData.water.waterTotal);
 	DOM.waterSpent().textContent = waterUnit(gameData.water.totalWaterSpent);
+
+	if (!$(".item-mastery-container")) {
+		insertItemAchievements()
+	}
 }
 
 function syncLiquidAnimation() {
@@ -1539,6 +1546,7 @@ function sendExplore(id) {
 			
 			loot[item] = (loot[item] || 0) + 1;
 			addItemToInventory(item);
+			addItemToMastery(item);
 			
 			if (item_master_data[item]?.type === "consumable") {
 				const list = document.querySelector('.item-select');
@@ -1596,6 +1604,7 @@ function sendExplore(id) {
 				const itemDef = item_master_data[item];
 				messages.push(randArray(def.flavorText.found).replace('[ITEM]', `<b>${itemDef.name}</b>`));
 				addItemToInventory(item);
+				addItemToMastery(item);
 				
 				if (item_master_data[item]?.type === "consumable") {
 					const list = document.querySelector('.item-select');
@@ -2301,7 +2310,57 @@ function updateResearchButtons() {
 	})
 }
 
+// ================================
+// 		Achievements
+// ================================
 
+function insertItemAchievements() {
+	const achievementPanel = $('#achievements')
+
+	const itemMasteryContainer = document.createElement('div')
+	itemMasteryContainer.classList.add("item-mastery-container")
+
+	const itemMasteryTitle = document.createElement('h3')
+	itemMasteryTitle.textContent = "Item Mastery"
+	itemMasteryContainer.appendChild(itemMasteryTitle)
+
+	const itemMasteryList = document.createElement('div')
+	itemMasteryList.classList.add("item-mastery-list")
+
+	Object.entries(gameData.mastery).forEach(([id, amount]) => {
+		const itemDiv = document.createElement('div')
+		itemDiv.classList.add("item-mastery-item")
+		
+		const item = document.createElement('div');
+		item.classList.add('inventory-item', 'fold');
+		/* item.dataset.item = id; */
+		
+		const iconDiv = document.createElement('div');
+		iconDiv.classList.add('inventory-icon');
+		const img = new Image();
+		img.src = `/images/${item_master_data[id]?.icon || ""}`;
+		iconDiv.appendChild(img);
+		
+		const nameDiv = document.createElement('div');
+		nameDiv.classList.add('inventory-name');
+		const name = item_master_data[id]?.name || id;
+		nameDiv.innerHTML = `<span>${name}</span>`;
+		
+		const qtyDiv = document.createElement('div');
+		qtyDiv.classList.add('inventory-qty');
+		qtyDiv.textContent = numberFormat(amount);
+		
+		item.appendChild(iconDiv);
+
+		itemDiv.appendChild(nameDiv);
+		itemDiv.appendChild(item);
+		itemDiv.appendChild(qtyDiv);
+		itemMasteryList.appendChild(itemDiv);
+	})
+
+	itemMasteryContainer.appendChild(itemMasteryList)
+	achievementPanel.appendChild(itemMasteryContainer)
+}
 
 // ================================
 // 		Inventory
