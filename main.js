@@ -71,8 +71,8 @@ var gameData = {
 	explore: {
 		level: 1, 
 		xp: 0,
-		stamina: 50,
-		staminaMax: 50,
+		stamina: 100,
+		staminaMax: 100,
 		staminaTick: 0,
 		zones: {},
 	},
@@ -209,6 +209,7 @@ const upgradeDefs = {
 				for (const id of ['drippy-faucet', 'toilet-flapper', 'shower-head']) {
 					if (state.upgrades[id]) {
 						state.upgrades[id].modifier = 1 + level;
+						console.log(state.upgrades[id].modifier)
 					}
 				}
 			}
