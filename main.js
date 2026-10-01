@@ -90,8 +90,7 @@ var gameData = {
 		consumables: {},
 		equipment: {},
 	},
-	mastery: {
-	},
+	mastery: {},
 	equipped: {
 		BACK: null,
 		HEAD: null,
@@ -1393,7 +1392,7 @@ function exploreStart(e) {
 
 function buildExploreElement(id) {
 	const def = exploreDefs[id];
-	const explorePanel = document.getElementById('explore')
+	const explorePanel = $('#explore')
 	
 	// Explore console (left)
 	const console = document.createElement('div');
@@ -1468,50 +1467,13 @@ function buildExploreElement(id) {
 		
 		itemsList.appendChild(buildConsumableButton(itemId));
 	});
-
-	// Loot table
-	const lootContainer =  document.createElement("div")
-	lootContainer.classList.add("loot-container")
-
-	const addText = document.createElement("h3")
-	addText.textContent = "Items found here..."
-	
-	const lootTableList = document.createElement("div")
-	lootTableList.classList.add("loot-table")
-
-	def.drops.forEach( ([itemId]) => {
-		const itemDef = item_master_data[itemId];
-
-		const item = document.createElement('div');
-		item.classList.add('inventory-item', 'fold');
-		/* item.dataset.item = itemDef; */
-		
-		const iconDiv = document.createElement('div');
-		iconDiv.classList.add('inventory-icon');
-		const img = new Image();
-		img.src = `/images/${itemDef?.icon || ""}`;
-		iconDiv.appendChild(img);
-		
-		const nameDiv = document.createElement('div');
-		nameDiv.classList.add('inventory-name');
-		const name = itemDef?.name || id;
-		nameDiv.innerHTML = `<span>${name}</span>`;
-		
-		item.appendChild(iconDiv);
-		item.appendChild(nameDiv);
-		
-		lootTableList.appendChild(item);
-	})
-
-	lootContainer.appendChild(addText)
-	lootContainer.appendChild(lootTableList)
-
 	
 	options.appendChild(continueBtn)
 	options.appendChild(itemsList)
 	explorePanel.appendChild(console)
 	explorePanel.appendChild(options)
-	explorePanel.appendChild(lootContainer)
+	// Loot table
+	generateLootTable(id)
 }
 
 function sendExplore(id) {
@@ -1639,7 +1601,7 @@ function sendExplore(id) {
 	// update Continue stamina
 	document.getElementById("continue").children[2].textContent =
 	`${gameData.explore.stamina} / ${gameData.explore.staminaMax}`;
-	
+	generateLootTable(id);
 	requestRender();
 }
 
@@ -1656,6 +1618,62 @@ function looter(id) {
 		if (roll <= cumulative) return itemId;
 	}
 	return null;
+}
+
+function generateLootTable(id) {
+	const def = exploreDefs[id];
+	const explorePanel = $('#explore')
+	if ($('.loot-container')) {$('.loot-container').remove()}
+
+	const lootContainer =  document.createElement("div")
+	lootContainer.classList.add("loot-container")
+	lootContainer.innerHTML = ''
+
+	const addText = document.createElement("h3")
+	addText.textContent = "Items found here..."
+	
+	const lootTableList = document.createElement("div")
+	lootTableList.classList.add("loot-table")
+
+	def.drops.forEach( ([itemId]) => {
+		const itemDef = item_master_data[itemId];
+		// If item mastery > 1, then show in loot table
+		checkItemMastery(itemId)
+		const mastery = gameData.mastery[itemId].amount ?? 0
+
+		const item = document.createElement('div');
+		item.classList.add('inventory-item', 'fold');
+		
+		const iconDiv = document.createElement('div');
+		iconDiv.classList.add('inventory-icon');
+		
+		const img = new Image();
+		
+		const nameDiv = document.createElement('div');
+		nameDiv.classList.add('inventory-name');
+		let name = ''
+
+		if (mastery == 0 ) {
+			img.src = `/images/question-mark-light.png`;
+			name = '???'
+		} else {
+			img.src = `/images/${itemDef?.icon || ""}`;
+			name = itemDef?.name || id;
+		}
+		
+		iconDiv.appendChild(img);
+		nameDiv.innerHTML = `${name}`;
+		
+		item.appendChild(iconDiv);
+		item.appendChild(nameDiv);
+		
+		lootTableList.appendChild(item);
+		
+		explorePanel.appendChild(lootContainer);
+	})
+
+	lootContainer.appendChild(addText)
+	lootContainer.appendChild(lootTableList)
 }
 
 function calcExploreXp(itemId) {
@@ -2331,42 +2349,54 @@ function insertItemMastery() {
 			emptyList.textContent = "Explore or craft items to increase mastery."
 			itemMasteryList.appendChild(emptyList)
 	} else {
-		Object.entries(gameData.mastery).forEach(([id, amount]) => {
-			const itemDiv = document.createElement('div')
-			itemDiv.classList.add("item-mastery-item")
-			
-			const item = document.createElement('div');
-			item.classList.add('inventory-item', 'fold');
-			
-			const iconDiv = document.createElement('div');
-			iconDiv.classList.add('inventory-icon');
-			const img = new Image();
-			img.src = `/images/${item_master_data[id]?.icon || ""}`;
-			iconDiv.appendChild(img);
-			
-			const nameDiv = document.createElement('div');
-			nameDiv.classList.add('inventory-name');
-			const name = item_master_data[id]?.name || id;
-			nameDiv.innerHTML = `${name}`;
-			
-			const qtyDiv = document.createElement('div');
-			qtyDiv.classList.add('inventory-qty');
-			qtyDiv.textContent = numberFormat(amount);
-			
-			item.appendChild(iconDiv);
-
-			itemDiv.appendChild(nameDiv);
-			itemDiv.appendChild(item);
-			itemDiv.appendChild(qtyDiv);
-			itemMasteryList.appendChild(itemDiv);
+		Object.entries(gameData.mastery).forEach(([id]) => {
+			if (gameData.mastery[id].amount > 0) {
+				const itemDiv = document.createElement('div')
+				itemDiv.classList.add("item-mastery-item")
+				
+				const item = document.createElement('div');
+				item.classList.add('inventory-item', 'fold');
+				
+				const iconDiv = document.createElement('div');
+				iconDiv.classList.add('inventory-icon');
+				const img = new Image();
+				img.src = `/images/${item_master_data[id]?.icon || ""}`;
+				iconDiv.appendChild(img);
+				
+				const nameDiv = document.createElement('div');
+				nameDiv.classList.add('inventory-name');
+				const name = item_master_data[id]?.name || id;
+				nameDiv.innerHTML = `${name}`;
+				
+				const qtyDiv = document.createElement('div');
+				qtyDiv.classList.add('inventory-qty');
+				qtyDiv.textContent = numberFormat(gameData.mastery[id].amount);
+				
+				item.appendChild(iconDiv);
+	
+				itemDiv.appendChild(nameDiv);
+				itemDiv.appendChild(item);
+				itemDiv.appendChild(qtyDiv);
+				itemMasteryList.appendChild(itemDiv);
+			}
 		})
 	}
 	itemMasteryContainer.appendChild(itemMasteryList)
 	achievementPanel.appendChild(itemMasteryContainer)
 }
 
-function refreshItemMastery() {
+function itemMasteryThreshold(itemId) {
+	const item = gameData.mastery[itemId];
+	const mastery = [
+		{ level: 1, threshold: 10, label: "beginner"},
+		{ level: 2, threshold: 100, label: "intermediate"},
+		{ level: 3, threshold: 1000, label: "advanced"},
+		{ level: 4, threshold: 10000, label: "proficient"},
+		{ level: 5, threshold: 100000, label: "expert"},
+		{ level: 6, threshold: 1000000, label: "master"},
+	];
 
+	// count mastery to show loot table drops
 }
 
 // ================================
@@ -2399,8 +2429,19 @@ function addItemToInventory(itemId, amount = 1) {
 function addItemToMastery(itemId, amount = 1) {
 	const def = item_master_data[itemId];
 	if (!def) return;
+
+	checkItemMastery(itemId)
 	
-	gameData.mastery[itemId] = (gameData.mastery[itemId] ?? 0) + amount;
+	gameData.mastery[itemId].amount = (gameData.mastery[itemId].amount ?? 0) + amount;
+}
+
+function checkItemMastery(itemId) {
+	if (!gameData.mastery[itemId]) {
+		gameData.mastery[itemId] = {
+			amount: 0,
+			level: 0
+		};
+	}
 }
 
 function consumeItem(itemId, amount = 1) {
