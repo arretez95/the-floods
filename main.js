@@ -86,19 +86,11 @@ var gameData = {
 		// Future achievement implementations
 	},
 	inventory: {
-		items: {
-			wood: 25,
-		},
+		items: {},
 		consumables: {},
-		equipment: {
-			simple_hammer: 1,
-			simple_hatchet: 1,
-		},
+		equipment: {},
 	},
 	mastery: {
-		wood: 25,
-		stone: 1,
-		simple_hammer: 1,
 	},
 	equipped: {
 		BACK: null,
@@ -1022,12 +1014,17 @@ if (el) el.textContent = v;
 } */
 
 function renderAchievements() {
+	const current = JSON.stringify({
+		mastery: gameData.mastery
+	});
+
+	if (current === lastInventoryJSON) return;
+	lastInventoryJSON = current;
+
+	insertItemMastery()
+
 	DOM.totalWater().textContent = waterUnit(gameData.water.waterTotal);
 	DOM.waterSpent().textContent = waterUnit(gameData.water.totalWaterSpent);
-
-	if (!$(".item-mastery-container")) {
-		insertItemAchievements()
-	}
 }
 
 function syncLiquidAnimation() {
@@ -2315,8 +2312,9 @@ function updateResearchButtons() {
 // 		Achievements
 // ================================
 
-function insertItemAchievements() {
+function insertItemMastery() {
 	const achievementPanel = $('#achievements')
+	if ($('.item-mastery-container')) {$('.item-mastery-container').remove()}
 
 	const itemMasteryContainer = document.createElement('div')
 	itemMasteryContainer.classList.add("item-mastery-container")
@@ -2328,38 +2326,47 @@ function insertItemAchievements() {
 	const itemMasteryList = document.createElement('div')
 	itemMasteryList.classList.add("item-mastery-list")
 
-	Object.entries(gameData.mastery).forEach(([id, amount]) => {
-		const itemDiv = document.createElement('div')
-		itemDiv.classList.add("item-mastery-item")
-		
-		const item = document.createElement('div');
-		item.classList.add('inventory-item', 'fold');
-		
-		const iconDiv = document.createElement('div');
-		iconDiv.classList.add('inventory-icon');
-		const img = new Image();
-		img.src = `/images/${item_master_data[id]?.icon || ""}`;
-		iconDiv.appendChild(img);
-		
-		const nameDiv = document.createElement('div');
-		nameDiv.classList.add('inventory-name');
-		const name = item_master_data[id]?.name || id;
-		nameDiv.innerHTML = `<span>${name}</span>`;
-		
-		const qtyDiv = document.createElement('div');
-		qtyDiv.classList.add('inventory-qty');
-		qtyDiv.textContent = numberFormat(amount);
-		
-		item.appendChild(iconDiv);
+	if (Object.keys(gameData.mastery).length === 0) {
+		const emptyList = document.createElement('p')
+			emptyList.textContent = "Explore or craft items to increase mastery."
+			itemMasteryList.appendChild(emptyList)
+	} else {
+		Object.entries(gameData.mastery).forEach(([id, amount]) => {
+			const itemDiv = document.createElement('div')
+			itemDiv.classList.add("item-mastery-item")
+			
+			const item = document.createElement('div');
+			item.classList.add('inventory-item', 'fold');
+			
+			const iconDiv = document.createElement('div');
+			iconDiv.classList.add('inventory-icon');
+			const img = new Image();
+			img.src = `/images/${item_master_data[id]?.icon || ""}`;
+			iconDiv.appendChild(img);
+			
+			const nameDiv = document.createElement('div');
+			nameDiv.classList.add('inventory-name');
+			const name = item_master_data[id]?.name || id;
+			nameDiv.innerHTML = `${name}`;
+			
+			const qtyDiv = document.createElement('div');
+			qtyDiv.classList.add('inventory-qty');
+			qtyDiv.textContent = numberFormat(amount);
+			
+			item.appendChild(iconDiv);
 
-		itemDiv.appendChild(nameDiv);
-		itemDiv.appendChild(item);
-		itemDiv.appendChild(qtyDiv);
-		itemMasteryList.appendChild(itemDiv);
-	})
-
+			itemDiv.appendChild(nameDiv);
+			itemDiv.appendChild(item);
+			itemDiv.appendChild(qtyDiv);
+			itemMasteryList.appendChild(itemDiv);
+		})
+	}
 	itemMasteryContainer.appendChild(itemMasteryList)
 	achievementPanel.appendChild(itemMasteryContainer)
+}
+
+function refreshItemMastery() {
+
 }
 
 // ================================
