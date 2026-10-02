@@ -562,11 +562,11 @@ const researchDefs = {
 		desc: "Reduces research cost for all research.",
 		max: 99,
 		cost: level => level === 0 ? 5 : Math.pow(level, 3.15) + 1,
-		duration: level => level === 0 ? duration({m: 10}) : duration({ m: 10 * Math.pow(level, 2) }),
+		duration: level => level === 0 ? duration({m: 5}) : duration({ m: 5 * Math.pow(level, 2) }),
 		effect: (state, level) => state.researchCostReduction = Math.max(0.004, level * 0.004),
 		effectText: level => level === 0 ? '0.00x' : `${(Math.max(0.004, level * 0.004)).toFixed(3)}x`,
-		unlock: () => gameData.water.level >= 30,
-		unlockText: "Reach Level 30"
+		unlock: () => gameData.water.level >= 10,
+		unlockText: "Reach Level 10"
 	},
 	'research_speed': {
 		name: 'Research Speed',
@@ -574,11 +574,11 @@ const researchDefs = {
 		desc: 'Reduce time needed to complete research.',
 		max: 99,
 		cost: level => level === 0 ? 5 : Math.pow(level, 2.1) * 5,
-		duration: level => duration({m: Math.pow(level + 1, 2.54) + 4}),
+		duration: level => level === 0 ? duration({m: 5.5}) : duration({ m: 5.5 * Math.pow(level, 2) }),
 		effect: (state, level) => state.durationMultiplier = Math.max(0.002, level * 0.002),
 		effectText: level => level === 0 ? '0.00x' : Math.max(0.002, level * 0.002).toFixed(3),
-		unlock: () => gameData.water.level >= 30,
-		unlockText: "Reach Level 30"
+		unlock: () => gameData.water.level >= 10,
+		unlockText: "Reach Level 10"
 	},
 	'research_gain': {
 		name: 'RP Gain',
@@ -586,13 +586,13 @@ const researchDefs = {
 		desc: 'Increase research points gain.',
 		max: 7, 
 		cost: level => level === 0 ? 5 : Math.pow(level + 5, 3),
-		duration: level => duration({m: Math.pow(level + 1, 2.54) + 4}),
+		duration: level => level === 0 ? duration({m: 10}) : duration({ m: 10 * Math.pow(level, 2) }),
 		effect: (state, level) => state.rpMult = level,
 		effectText: level => level === 0 ? '0.00x' : `${level.toFixed(2)}x`,
 		unlock: [
-			() => gameData.water.level >= 30,
-			() => gameData.explore.level >= 30,
-			() => gameData.craft.level >= 30,
+			() => gameData.water.level >= 15,
+			() => gameData.explore.level >= 15,
+			() => gameData.craft.level >= 15,
 		],
 		unlockText: "Reach Water, Explore, & Craft Level 30"
 	},
@@ -1143,12 +1143,12 @@ function levelUpSkill(skill) {
 const UNLOCK_REQUIREMENTS = {
 	explore: () => gameData.water.level >= 3,
 	craft: () => gameData.explore.level >= 3,
-	research: () =>
-		gameData.water.level >= 2 &&
-		gameData.explore.level >= 2 &&
-		gameData.craft.level >= 2,
-	trackers: () => gameData.water.level >= 50,
-	achievements: () => gameData.explore.level >= 5,
+	research: () => gameData.water.level >= 2,
+	trackers: () => 
+		gameData.water.level >= 20 &&
+		gameData.explore.level >= 20 &&
+		gameData.craft.level >= 20,
+	achievements: () => gameData.explore.level >= 3,
 }
 
 function unlockSkill() {
