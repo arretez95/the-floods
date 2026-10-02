@@ -1,0 +1,154 @@
+Basic Design:
+- Flood the Earth with as much water as you can! Endgame: Reach Infinity km3 of water?
+
+Inventory: 
+	Turn stats panel into equipment/inventory information
+
+Water:
+	Generate more water per upgrade.
+	Water level boosts water gain? Chance for instant tick?
+	Further upgrades can be unlocked by getting more water, exploring for recipes, crafting and equipping items, progressing in jobs, etc.
+
+Explore:
+	Similar to FarmRPG: click to explore further into region, limited by stamina.
+	1 stamina = 1 step = 1 explore XP. 100,000 steps to complete area.
+	Stamina regenerates over time or can be refilled with crafted items.
+	Max stamina improved by research.
+	Exploring provides materials for crafting.
+	May increase water tick rate temporarily.
+	Chance to fail and lose water.
+	Hire explorers? (less efficient than player)
+	Add LootTable function	
+	Areas:
+		Park
+		Neighborhood
+		School Grounds
+		Downtown
+		Slums
+		Abandoned Buildings
+		Transit Tunnel 
+		Beach
+
+Crafting:
+	Craft equipment and accessories to improve overall performance.
+	
+
+Research:
+	Improve performance of other skills.
+	Time locked (e.g. each research takes X amount of time to complete)
+	Research Categories:
+		Core Research
+			Research Points Discount
+			Research Speed
+			Uprades Respecs
+		Water Research
+			Drop Amount: increases water per tick
+			Drop Rate: increases water tick Speed
+			Critical Chance: (starts at 0%, max 10%) +0.5% per research
+			Critical Amount: Amount of water received with crit
+			Chance to get research point
+		Explore Research
+			Chance to get research point
+		Crafts Research
+			Chance to get research point
+
+Job:
+	Each job has different paths which unlock different upgrades and exploration areas.
+	Handyman
+		Plumber => Apprentice, Journeyman, Master
+		Electrician => Apprentice, Journeyman, Master
+		Construction => Laborer, Foreman, Inspector
+	Delinquent
+		Pickpocket => Pilferer, Cutpurse, Extraordinaire
+		Arsonist => Firebug, Accelerant, Infernist
+		Saboteur => Vandal, Infiltrator, Rogue
+	Collegiate
+		Engineer => Junior, Senior, Chief
+		Scientist => Junior, Senior, Chief
+		Politician => Councilman, Governor, Minister
+	Devout
+		Cultist => Initiate, Acolyte, Zealot
+		Priest => Cleric, Pastor, Bishop
+		Mystic => Seer, Medium, Avatar
+
+Weather: 
+	- affects  water evaporation rate
+	- changes every hour?
+
+Town
+	Shops, games, activities, and fun!
+	Bargaining skill
+	Muju's Moutique:
+		Equipment & accessory purchase and sale
+	
+
+
+
+Attributes:
+
+Stats Panel:
+	Move equipment to stats panel
+	Reconfigure attributes
+	Attributes improve explore, skill, and crafting performance
+		Physical
+			Strength
+			- improve explore rate.
+			Constitution
+			- improve explore stamina. +1 stamina
+			Dexterity
+			- 
+			Agility
+			- 
+		Mental
+			Intelligence
+			- 
+			Wisdom
+			- 
+			Charisma
+			- 
+			Perception
+			- 
+
+
+<div style="margin: 0 auto; text-align: center; margin-bottom: 5px; cursor: pointer;"  title="">[ ? ]</div>
+<div id="attributes">
+	<div class="colheader">Attribute Points: 0</div>
+	<div class="col">
+		<div class="col-name">Physical Attributes</div>
+		<div class="attribute">
+			<div class="attr-name"><span class="attr-add" data-skill="strength">[ + ]</span>Strength</div>
+			<div class="attr-value" data-skill="strength">0</div>
+		</div>
+		<div class="attribute">
+			<div class="attr-name"><span class="attr-add" data-skill="constitution">[ + ]</span>Constitution</div>
+			<div class="attr-value" data-skill="constitution">0</div>
+		</div>
+		<div class="attribute">
+			<div class="attr-name"><span class="attr-add" data-skill="dexterity">[ + ]</span>Dexterity</div>
+			<div class="attr-value" data-skill="dexterity">0</div>
+		</div>
+		<div class="attribute">
+			<div class="attr-name"><span class="attr-add" data-skill="agility">[ + ]</span>Agility</div>
+			<div class="attr-value" data-skill="agility">0</div>
+		</div>
+	</div>
+	<div class="col">
+		<div class="col-name">Mental Attributes</div>
+		<div class="attribute">
+			<div class="attr-name"><span class="attr-add" data-skill="intelligence">[ + ]</span>Intelligence</div>
+			<div class="attr-value" data-skill="intelligence">0</div>
+		</div>
+		<div class="attribute">
+			<div class="attr-name"><span class="attr-add" data-skill="wisdom">[ + ]</span>Wisdom</div>
+			<div class="attr-value" data-skill="wisdom">0</div>
+		</div>
+		<div class="attribute">
+			<div class="attr-name"><span class="attr-add" data-skill="charisma">[ + ]</span>Charisma</div>
+			<div class="attr-value" data-skill="charisma">0</div>
+		</div>
+		<div class="attribute">
+			<div class="attr-name"><span class="attr-add" data-skill="perception">[ + ]</span>Perception</div>
+			<div class="attr-value" data-skill="perception">0</div>
+		</div>
+	</div>
+</div>
