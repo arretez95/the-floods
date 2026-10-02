@@ -248,9 +248,9 @@ const exploreDefs = {
 			['blueberry', 50.111],
 			['mushroom', 28.127],
 			['feather', 28.155],
-			['toy_bucket', 0.00089],
-			['toy_shovel', 0.00089],
-			['teddy_bear', 0.000035]
+			['toy_bucket', 0.0089],
+			['toy_shovel', 0.0089],
+			['teddy_bear', 0.00035]
 		],
 		enemies: [],
 		startText: "You take a stroll into the local park...",
@@ -524,7 +524,29 @@ const craftRecipes = {
 		},
 		duration: duration({s: 6}),
 		category: 'equipment'
-	}
+	},
+	board: {
+		requires: {
+			wood: 2
+		},
+		quantity: 1,
+		unlock: {
+			level: 1
+		},
+		duration: duration({s: 6}),
+		category: 'items'
+	},
+	'small_bucket': {
+		requires: {
+			board: 5,
+		},
+		quantity: 1,
+		unlock: {
+			level: 2
+		},
+		duration: duration({s: 10}),
+		category: 'items'
+	},
 }
 
 const researchDefs = {
