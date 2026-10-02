@@ -90,7 +90,7 @@ var gameData = {
 		researchUnlocked: {},
 	},
 	achievements: {
-		// Future achievement implementations
+		mastery: {},
 	},
 	inventory: {
 		items: {
@@ -100,7 +100,6 @@ var gameData = {
 		consumables: {},
 		equipment: {},
 	},
-	mastery: {},
 	equipped: {
 		BACK: null,
 		HEAD: null,
@@ -647,8 +646,8 @@ const researchDefs = {
 		duration: level => duration({m: Math.pow(level + 1, 2.2) + 2}),
 		effect: (level) => gameData.explore.zones.park.stamUsed = level,
 		effectText: level => '+' + level,
-		unlock: () => gameData.explore.level >= 5,
-		unlockText: "Reach Explore Level 5"
+		unlock: () => gameData.explore.level >= 2,
+		unlockText: "Reach Explore Level 2"
 	},
 	'improve_staminaMax': {
 		name: 'Increase Max Stamina',
@@ -1047,7 +1046,7 @@ if (el) el.textContent = v;
 
 function renderAchievements() {
 	const current = JSON.stringify({
-		mastery: gameData.mastery
+		mastery: gameData.achievements.mastery
 	});
 
 	if (current === lastInventoryJSON) return;
@@ -1701,7 +1700,7 @@ function generateLootTable(id) {
 		const itemDef = item_master_data[itemId];
 		// If item mastery > 1, then show in loot table
 		checkItemMastery(itemId)
-		const mastery = gameData.mastery[itemId].amount ?? 0
+		const mastery = gameData.achievements.mastery[itemId].amount ?? 0
 
 		const item = document.createElement('div');
 		item.classList.add('inventory-item', 'fold');
@@ -2406,13 +2405,13 @@ function insertItemMastery() {
 	const itemMasteryList = document.createElement('div')
 	itemMasteryList.classList.add("item-mastery-list")
 
-	if (Object.keys(gameData.mastery).length === 0) {
+	if (Object.keys(gameData.achievements.mastery).length === 0) {
 		const emptyList = document.createElement('p')
 			emptyList.textContent = "Explore or craft items to increase mastery."
 			itemMasteryList.appendChild(emptyList)
 	} else {
-		Object.entries(gameData.mastery).forEach(([id]) => {
-			if (gameData.mastery[id].amount > 0) {
+		Object.entries(gameData.achievements.mastery).forEach(([id]) => {
+			if (gameData.achievements.mastery[id].amount > 0) {
 				const itemDiv = document.createElement('div')
 				itemDiv.classList.add("item-mastery-item")
 				
@@ -2432,7 +2431,7 @@ function insertItemMastery() {
 				
 				const qtyDiv = document.createElement('div');
 				qtyDiv.classList.add('inventory-qty');
-				qtyDiv.textContent = numberFormat(gameData.mastery[id].amount);
+				qtyDiv.textContent = numberFormat(gameData.achievements.mastery[id].amount);
 				
 				item.appendChild(iconDiv);
 	
@@ -2448,7 +2447,7 @@ function insertItemMastery() {
 }
 
 function itemMasteryThreshold(itemId) {
-	const item = gameData.mastery[itemId];
+	const item = gameData.achievements.mastery[itemId];
 	const mastery = [
 		{ level: 1, threshold: 10, label: "beginner"},
 		{ level: 2, threshold: 100, label: "intermediate"},
@@ -2494,12 +2493,12 @@ function addItemToMastery(itemId, amount = 1) {
 
 	checkItemMastery(itemId)
 	
-	gameData.mastery[itemId].amount = (gameData.mastery[itemId].amount ?? 0) + amount;
+	gameData.achievements.mastery[itemId].amount = (gameData.achievements.mastery[itemId].amount ?? 0) + amount;
 }
 
 function checkItemMastery(itemId) {
-	if (!gameData.mastery[itemId]) {
-		gameData.mastery[itemId] = {
+	if (!gameData.achievements.mastery[itemId]) {
+		gameData.achievements.mastery[itemId] = {
 			amount: 0,
 			level: 0
 		};
