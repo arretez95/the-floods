@@ -6,6 +6,7 @@ let lastInventoryJSON = "";
 
 import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
 import { clamp, random, randArray, duration, msToHMS, waterUnit, numberFormat, titleCase, getInventoryCount } from "./lib/js/util.js"
+import { $, requestRender, syncLiquidAnimation, renderUI} from "./lib/js/render.js"
 
 /* function initUpgrades(defs) {
 	const upgrades = {};
@@ -47,7 +48,7 @@ function initResearch(defs) {
 }
  */
 
-var gameData = {
+export let gameData = {
 	player: {
 		name: 'Adri',
 		start: Date.now(),
@@ -846,9 +847,7 @@ function attrUp(e) {
 // ================================
 // 		RENDERING
 // ================================
-
-let needsRender = false;
-let tickTimer = null;
+/* let needsRender = false;
 let stamTimer = null;
 let lastCraftUpdate = 0
 
@@ -1033,7 +1032,7 @@ function renderUpgrades() {
 	checkMaxLevel();
 }
 
-/* function renderAttributes() {
+function renderAttributes() {
 DOM.attributesHeader().textContent = `Attribute Points: ${gameData.attributes.points}`;
 
 document.querySelectorAll('.attr-add').forEach(btn => {
@@ -1052,7 +1051,7 @@ Object.entries(gameData.attributes.mental).forEach(([k, v]) => {
 	const el = document.querySelector(`.attr-value[data-skill="${k}"]`);
 if (el) el.textContent = v;
 });
-} */
+}
 
 function renderAchievements() {
 	const current = JSON.stringify({
@@ -1074,7 +1073,7 @@ function syncLiquidAnimation() {
 		'--tick-duration',
 		`${seconds}s`
 	);
-}
+} */
 
 // ================================
 // 		GAME LOGIC
@@ -2742,7 +2741,7 @@ function renderUnequipBtn(slot) {
 // ================================
 // 		GAME LOOP
 // ================================
-
+let tickTimer = null;
 function waterTick() {
 	if (tickTimer) clearTimeout(tickTimer);
 	
