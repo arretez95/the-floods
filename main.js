@@ -104,6 +104,8 @@ export let gameData = {
 	},
 }
 
+window.gameData = gameData
+
 // ===============================
 // 		UI HANDLERS
 // ===============================
