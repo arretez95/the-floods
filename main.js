@@ -5,7 +5,7 @@ export const DROP_ML = 0.05;
 
 import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
 import { clamp, random, randArray, duration, msToHMS, waterUnit, numberFormat, titleCase, getInventoryCount } from "./lib/js/util.js"
-import { $, requestRender, syncLiquidAnimation, renderUI} from "./lib/js/render.js"
+import { $, requestRender, syncLiquidAnimation, renderUI, renderEquipment } from "./lib/js/render.js"
 import { gainSkillXP } from "./lib/js/game/logic.js"
 import { waterDrop, checkUnlocks, insertWaterUpgrades, spawnDropsForWaterGain } from "./lib/js/game/water.js"
 import { insertExploreAreas, tickStamina } from "./lib/js/game/explore.js"
