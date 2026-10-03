@@ -6,7 +6,7 @@ export const DROP_ML = 0.05;
 import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
 import { clamp, random, randArray, duration, msToHMS, waterUnit, numberFormat, titleCase, getInventoryCount } from "./lib/js/util.js"
 import { $, requestRender, syncLiquidAnimation, renderUI, renderEquipment } from "./lib/js/render.js"
-import { gainSkillXP } from "./lib/js/game/logic.js"
+import { gainSkillXP, waterTick, gameTick } from "./lib/js/game/logic.js"
 import { waterDrop, checkUnlocks, insertWaterUpgrades, spawnDropsForWaterGain } from "./lib/js/game/water.js"
 import { insertExploreAreas, tickStamina } from "./lib/js/game/explore.js"
 import { upgradeDefs, exploreDefs, itemMasterData, craftRecipes, researchDefs } from "./lib/js/def.js"
@@ -1000,38 +1000,6 @@ function renderUnequipBtn(slot) {
 	
 // 
 
-// ================================
-// 		GAME LOOP
-// ================================
-let tickTimer = null;
-function waterTick() {
-	if (tickTimer) clearTimeout(tickTimer);
-	
-	tickTimer = setTimeout(() => {
-		waterDrop();
-		spawnDropsForWaterGain(gameData.water.waterPerTick);
-		
-		setTimeout(() => {
-			gainSkillXP('water', gameData.water.waterPerTick / DROP_ML);
-			checkUnlocks();
-			requestRender();
-		}, 510); // delay matches drop fall time
-		
-		
-		waterTick();
-	},gameData.water.tickSpeed || 2000);
-}
-
-function gameTick() {
-	const now = Date.now()
-	
-	tickStamina(now)
-	updateCrafting(now)
-	updateResearch(now)
-	// other systems
-	
-	requestAnimationFrame(gameTick)
-}
 
 
 // ================================
