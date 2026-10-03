@@ -1,10 +1,11 @@
 // ===============================
 // 		Init
 // ===============================
-const DROP_ML = 0.05;
+export const DROP_ML = 0.05;
 let lastInventoryJSON = "";
 
-import { initUpgrades, initExplore, initResearch } from "./js/init.js"
+import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
+import { clamp, random, randArray, duration, msToHMS, waterUnit, numberFormat, titleCase, getInventoryCount } from "./lib/js/util.js"
 
 /* function initUpgrades(defs) {
 	const upgrades = {};
@@ -702,7 +703,7 @@ const researchDefs = {
 // 		HELPERS
 // ===============================
 
-function clamp(n, min = -Infinity, max = Infinity) {
+/* function clamp(n, min = -Infinity, max = Infinity) {
 	return Math.max(min, Math.min(max, n));
 }
 
@@ -791,7 +792,7 @@ function getInventoryCount(id) {
 		0
 	)
 }
-
+ */
 // ===============================
 // 		UI HANDLERS
 // ===============================
