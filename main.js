@@ -4,7 +4,9 @@
 const DROP_ML = 0.05;
 let lastInventoryJSON = "";
 
-function initUpgrades(defs) {
+import { initUpgrades, initExplore, initResearch } from "./js/init.js"
+
+/* function initUpgrades(defs) {
 	const upgrades = {};
 	
 	for (const key in defs) {
@@ -42,6 +44,7 @@ function initResearch(defs) {
 	
 	return research
 }
+ */
 
 var gameData = {
 	player: {
