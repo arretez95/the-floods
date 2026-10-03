@@ -6,8 +6,8 @@ export const DROP_ML = 0.05;
 import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
 import { clamp, random, randArray, duration, msToHMS, waterUnit, numberFormat, titleCase, getInventoryCount } from "./lib/js/util.js"
 import { $, requestRender, syncLiquidAnimation, renderUI} from "./lib/js/render.js"
-import { gainSkillXP, waterDrop, checkUnlocks, insertWaterUpgrades, insertExploreAreas } from "./lib/js/logic.js"
-import { upgradeDefs, exploreDefs, item_master_data, craftRecipes, researchDefs } from "./lib/js/def.js"
+import { gainSkillXP, waterDrop, checkUnlocks, insertWaterUpgrades, insertExploreAreas, tickStamina } from "./lib/js/logic.js"
+import { upgradeDefs, exploreDefs, itemMasterData, craftRecipes, researchDefs } from "./lib/js/def.js"
 
 export let gameData = {
 	player: {
@@ -152,7 +152,6 @@ function attrUp(e) {
 	requestRender();
 }
 
-
 // ================================
 // 		Crafting
 // ================================
@@ -191,7 +190,7 @@ function insertCraftRecipes() {
 }
 
 function buildCraftingElement(id) {
-	const def = item_master_data[id]
+	const def = itemMasterData[id]
 	const craftDefs = craftRecipes[id]
 	
 	const recipe = document.createElement('div')
@@ -217,7 +216,7 @@ function buildCraftingElement(id) {
 	let maxCraftable = Infinity
 	
 	for (const [reqId, qty] of Object.entries(craftDefs.requires)) {
-		const reqDef = item_master_data[reqId]
+		const reqDef = itemMasterData[reqId]
 		const inventory = INVENTORY_BUCKETS[reqDef.type]()
 		const available = inventory[reqId] ?? 0
 		
@@ -252,7 +251,7 @@ function buildCraftingElement(id) {
 	// Build a vertical list using <br>
 	const reqText = Object.entries(craftDefs.requires)
 	.map(([reqId, qty]) => {
-		const reqDef = item_master_data[reqId]
+		const reqDef = itemMasterData[reqId]
 		const have = getInventoryCount(reqId)
 		return `${have} / ${qty} ${reqDef.name}`
 	})
@@ -273,7 +272,7 @@ function buildCraftingElement(id) {
 }
 
 function addToCraftConsole(job) {
-	const item = item_master_data[job.id]
+	const item = itemMasterData[job.id]
 	const craftConsole = document.querySelector('.craft-console')
 	if (!craftConsole) return null
 	
@@ -349,7 +348,7 @@ function startNextCraft() {
 		
 		// Validate resources (per craft)
 		for (const [reqId, qty] of Object.entries(recipe.requires)) {
-			const reqDef = item_master_data[reqId]
+			const reqDef = itemMasterData[reqId]
 			const inventory = INVENTORY_BUCKETS[reqDef.type]()
 			if ((inventory[reqId] ?? 0) < qty) {
 				canCraft = false
@@ -362,7 +361,7 @@ function startNextCraft() {
 		
 		// Deduct resources ONCE
 		for (const [reqId, qty] of Object.entries(recipe.requires)) {
-			const reqDef = item_master_data[reqId]
+			const reqDef = itemMasterData[reqId]
 			const inventory = INVENTORY_BUCKETS[reqDef.type]()
 			inventory[reqId] -= qty
 		}
@@ -381,7 +380,7 @@ function updateCrafting(now) {
 	const craft = gameData.crafting.active
 	if (!craft || !craft.id) return	// safety guard
 	
-	const itemDef = item_master_data[craft.id]
+	const itemDef = itemMasterData[craft.id]
 	if (!itemDef) {
 		console.error('Unknown craft ID:', craft.id)
 		gameData.crafting.active = null
@@ -424,7 +423,7 @@ function cancelCrafting() {
 		const recipe = craftRecipes[job.id]
 		
 		for (const [reqId, qty] of Object.entries(recipe.requires)) {
-			const reqDef = item_master_data[reqId]
+			const reqDef = itemMasterData[reqId]
 			const inventory = INVENTORY_BUCKETS[reqDef.type]()
 			inventory[reqId] = (inventory[reqId] ?? 0) + qty
 		}
@@ -702,12 +701,12 @@ function insertItemMastery() {
 				const iconDiv = document.createElement('div');
 				iconDiv.classList.add('inventory-icon');
 				const img = new Image();
-				img.src = `/images/${item_master_data[id]?.icon || ""}`;
+				img.src = `/images/${itemMasterData[id]?.icon || ""}`;
 				iconDiv.appendChild(img);
 				
 				const nameDiv = document.createElement('div');
 				nameDiv.classList.add('inventory-name');
-				const name = item_master_data[id]?.name || id;
+				const name = itemMasterData[id]?.name || id;
 				nameDiv.innerHTML = `${name}`;
 				
 				const qtyDiv = document.createElement('div');
@@ -752,7 +751,7 @@ const INVENTORY_BUCKETS = {
 };
 
 function addItemToInventory(itemId, amount = 1) {
-	const def = item_master_data[itemId];
+	const def = itemMasterData[itemId];
 	if (!def) return;
 	
 	const bucketKey = def.type ?? "material";
@@ -769,7 +768,7 @@ function addItemToInventory(itemId, amount = 1) {
 }
 
 function addItemToMastery(itemId, amount = 1) {
-	const def = item_master_data[itemId];
+	const def = itemMasterData[itemId];
 	if (!def) return;
 
 	checkItemMastery(itemId)
@@ -808,7 +807,7 @@ function createInventoryItemElement(itemId, qty, onClick) {
 	iconDiv.classList.add('inventory-icon')
 	
 	const img = new Image()
-	img.src = `/images/${item_master_data[itemId]?.icon || ""}`
+	img.src = `/images/${itemMasterData[itemId]?.icon || ""}`
 	iconDiv.appendChild(img)
 	
 	const qtyDiv = document.createElement('div')
@@ -817,7 +816,7 @@ function createInventoryItemElement(itemId, qty, onClick) {
 	
 	const nameDiv = document.createElement('div')
 	nameDiv.classList.add('inventory-name')
-	nameDiv.innerHTML = `<span>${item_master_data[itemId]?.name || itemId}</span>`
+	nameDiv.innerHTML = `<span>${itemMasterData[itemId]?.name || itemId}</span>`
 	
 	item.appendChild(iconDiv)
 	item.appendChild(qtyDiv)
@@ -843,7 +842,7 @@ const EQUIP_SLOTS = {
 }
 
 function equipItem(itemId, preferredSlot = null) {
-	const def = item_master_data[itemId]
+	const def = itemMasterData[itemId]
 	if (!def || def.type !== 'equipment') return
 	
 	const inv = gameData.inventory.equipment
@@ -882,7 +881,7 @@ function recalcEquipmentEffects() {
 	
 	Object.values(gameData.equipped).forEach(itemId => {
 		if (!itemId) return
-		const def = item_master_data[itemId]
+		const def = itemMasterData[itemId]
 		if (typeof def.effect === 'function') {
 			def.effect(gameData)
 		}
@@ -896,7 +895,7 @@ function getEquippableItemsForSlot(slot) {
 	for (const itemId in inv) {
 		if (inv[itemId] <= 0) continue
 		
-		const def = item_master_data[itemId]
+		const def = itemMasterData[itemId]
 		if (!def || def.type !== 'equipment') continue
 		
 		const slots = Array.isArray(def.equipSlot) ? def.equipSlot : [def.equipSlot]
@@ -940,7 +939,7 @@ function renderEquippableList(slot) {
 	const items = Object.entries(inv).filter(([itemId, qty]) => {
 		if (qty <= 0) return false
 		
-		const def = item_master_data[itemId]
+		const def = itemMasterData[itemId]
 		if (!def || def.type !== 'equipment') return false
 		
 		const slots = Array.isArray(def.equipSlot) ? def.equipSlot : [def.equipSlot]
@@ -948,8 +947,8 @@ function renderEquippableList(slot) {
 		return slots.includes(slot)
 	})
 	.sort(([a], [b]) => {
-		const nameA = (item_master_data[a]?.name || a).toLowerCase()
-		const nameB = (item_master_data[b]?.name || b).toLowerCase()
+		const nameA = (itemMasterData[a]?.name || a).toLowerCase()
+		const nameB = (itemMasterData[b]?.name || b).toLowerCase()
 		return nameA.localeCompare(nameB)
 	})
 	
@@ -978,7 +977,7 @@ function renderUnequipBtn(slot) {
 
 	const unequipBtn = document.createElement("button");
 	unequipBtn.classList.add("unequip-btn");
-	unequipBtn.textContent = `Unequip ${titleCase(item_master_data[itemId].name)}`;	
+	unequipBtn.textContent = `Unequip ${titleCase(itemMasterData[itemId].name)}`;	
 	unequipBtn.addEventListener("click", () => {
 		unequipItem(slot)
 		renderEquippableList(slot)
