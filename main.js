@@ -8,6 +8,7 @@ import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
 import { clamp, random, randArray, duration, msToHMS, waterUnit, numberFormat, titleCase, getInventoryCount } from "./lib/js/util.js"
 import { $, requestRender, syncLiquidAnimation, renderUI} from "./lib/js/render.js"
 import { gainSkillXP } from "./lib/js/logic.js"
+import { upgradeDefs, exploreDefs, item_master_data, craftRecipes, researchDefs } from "./lib/js/def.js"
 
 /* function initUpgrades(defs) {
 	const upgrades = {};
@@ -142,7 +143,7 @@ export let gameData = {
 	},
 }
 
-const upgradeDefs = {
+/* const upgradeDefs = {
 	'drippy-faucet': {
 		name: "Sad Drippy Faucet",
 		desc: "Another faucet, another leak. +1 drop.",
@@ -699,7 +700,7 @@ const researchDefs = {
 		unlock: () => gameData.craft.level >= 10,
 		unlockText: "Reach Craft Level 10"
 	}
-};
+}; */
 
 // ===============================
 // 		HELPERS
