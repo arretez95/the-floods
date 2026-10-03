@@ -140,7 +140,7 @@ function openMenu(e) {
 	
 	switch (tab) {
 		case 'inv':
-		requestRender()
+			requestRender()
 	}
 }
 
