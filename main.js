@@ -10,6 +10,7 @@ import { waterTick, gameTick } from "./lib/js/game/logic.js"
 import { checkUnlocks, insertWaterUpgrades } from "./lib/js/game/water.js"
 import { insertExploreAreas } from "./lib/js/game/explore.js"
 import { insertCraftRecipes } from "./lib/js/game/craft.js"
+import { researchUnlocked, insertResearchItems } from "./lib/js/game/research.js"
 import { upgradeDefs, exploreDefs, itemMasterData, craftRecipes, researchDefs } from "./lib/js/def.js"
 
 export let gameData = {
