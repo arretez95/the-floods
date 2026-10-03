@@ -6,7 +6,7 @@ export const DROP_ML = 0.05;
 import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
 import { clamp, random, randArray, duration, msToHMS, waterUnit, numberFormat, titleCase, getInventoryCount } from "./lib/js/util.js"
 import { $, requestRender, syncLiquidAnimation, renderUI} from "./lib/js/render.js"
-import { gainSkillXP, waterDrop, checkUnlocks, insertWaterUpgrades, insertExploreAreas, tickStamina } from "./lib/js/logic.js"
+import { gainSkillXP, waterDrop, checkUnlocks, insertWaterUpgrades, insertExploreAreas, tickStamina } from "./lib/js/game/logic.js"
 import { upgradeDefs, exploreDefs, itemMasterData, craftRecipes, researchDefs } from "./lib/js/def.js"
 
 export let gameData = {
