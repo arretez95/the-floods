@@ -8,6 +8,8 @@ Water:
 	in upgradeDefs['drippy-faucet'], remove state.tickSpeed = 2000
 	Add the following under purchaseUpgrade():
 	if ( def['drippy-faucet'] === 1 ) { gameData.water.tickSpeed = 2000; }
+
+	Figure out how to get modifier upgrades to not overwrite each other (loose-valve, rust-buildup)
 	
 	Generate more water per upgrade.
 	Water level boosts water gain? Chance for instant tick?
