@@ -10,6 +10,7 @@ import { insertExploreAreas } from "./lib/js/game/explore.js"
 import { insertCraftRecipes } from "./lib/js/game/craft.js"
 import { insertResearchItems } from "./lib/js/game/research.js"
 import { upgradeDefs, exploreDefs, itemMasterData, craftRecipes, researchDefs } from "./lib/js/def.js"
+import { checkItemMastery } from "./lib/js/game/achievements.js"
 
 export let gameData = {
 	player: {
@@ -267,15 +268,6 @@ function addItemToMastery(itemId, amount = 1) {
 	checkItemMastery(itemId)
 	
 	gameData.achievements.mastery[itemId].amount = (gameData.achievements.mastery[itemId].amount ?? 0) + amount;
-}
-
-function checkItemMastery(itemId) {
-	if (!gameData.achievements.mastery[itemId]) {
-		gameData.achievements.mastery[itemId] = {
-			amount: 0,
-			level: 0
-		};
-	}
 }
 
 function consumeItem(itemId, amount = 1) {
