@@ -34,6 +34,7 @@ export let gameData = {
 		waterPerTick: 0, //in mL; 0.05 mL = 1 drop
 		tickMult: 1,
 		tickSpeed: 9E9,
+		maxWater: 500,
 		totalWaterSpent: 0,
 		upgrades: {},
 		upgradesUnlocked: {},
