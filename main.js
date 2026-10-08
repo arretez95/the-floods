@@ -11,7 +11,7 @@ import { insertCraftRecipes } from "./lib/js/game/craft.js"
 import { insertResearchItems } from "./lib/js/game/research.js"
 import { upgradeDefs, exploreDefs, itemMasterData, craftRecipes, researchDefs } from "./lib/js/def.js"
 import { checkItemMastery, insertItemMastery } from "./lib/js/game/achievements.js"
-import { renderUnequipBtn } from ".lib/js/game/inventory.js"
+import { renderUnequipBtn } from "./lib/js/game/inventory.js"
 
 export let gameData = {
 	player: {
