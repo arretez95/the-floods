@@ -2,15 +2,14 @@
 // 		Init
 // ===============================
 import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
-import { clamp, random, randArray, duration, msToHMS, waterUnit, numberFormat, titleCase, getInventoryCount } from "./lib/js/util.js"
-import { $, requestRender, syncLiquidAnimation, renderUI, renderEquipment } from "./lib/js/render.js"
+import { $, requestRender, syncLiquidAnimation, renderUI } from "./lib/js/render.js"
 import { DROP_ML, waterTick, gameTick } from "./lib/js/game/logic.js"
 import { checkUnlocks, insertWaterUpgrades } from "./lib/js/game/water.js"
 import { insertExploreAreas } from "./lib/js/game/explore.js"
 import { insertCraftRecipes } from "./lib/js/game/craft.js"
 import { insertResearchItems } from "./lib/js/game/research.js"
-import { upgradeDefs, exploreDefs, itemMasterData, craftRecipes, researchDefs } from "./lib/js/def.js"
-import { checkItemMastery, insertItemMastery } from "./lib/js/game/achievements.js"
+import { upgradeDefs, exploreDefs, researchDefs } from "./lib/js/def.js"
+import { insertItemMastery } from "./lib/js/game/achievements.js"
 import { renderUnequipBtn } from "./lib/js/game/inventory.js"
 
 export let gameData = {
