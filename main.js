@@ -12,7 +12,7 @@ import { upgradeDefs, exploreDefs, researchDefs } from "./lib/js/def.js"
 import { insertItemMastery } from "./lib/js/game/achievements.js"
 import { renderUnequipBtn } from "./lib/js/game/inventory.js"
 
-export let gameData = {
+export const gameData = {
 	player: {
 		name: 'Adri',
 		start: Date.now(),
