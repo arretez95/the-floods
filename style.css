@@ -934,7 +934,7 @@ Stats Panel
 	max-height: 64px;
 	position: relative;
 	background: var(--sticky-1);
-	padding: 0.5em;
+	padding: 1vw;
 	transform: rotate(-1deg);
 	clip-path: polygon(0% 0%, 80% 0, 100% 20%, 100% 100%, 0 100%)
 }
@@ -975,9 +975,9 @@ Stats Panel
 	transform: rotate(-5deg);
 }
 
-.inventory-icon img {
-	max-width: 64px;
-	max-height: 64px;
+.inventory-icon {
+	min-width: 32px;
+	min-height: 32px;
 }
 
 .inventory-qty {
@@ -1013,10 +1013,9 @@ Stats Panel
 
 .inventory-item:hover .inventory-name {
 	display: block;
-	zoom: 115%;
 }
 
-.inventory-item:hover img {
+.inventory-item:hover .inventory-icon {
 	visibility: hidden;
 }
 
