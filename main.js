@@ -1,7 +1,7 @@
 // ===============================
 // 		Init
 // ===============================
-import { initUpgrades, initExplore, initResearch } from "./lib/js/init.js"
+import { initUpgrades, initExplore, initResearch, initAutosave } from "./lib/js/init.js"
 import { $, requestRender, syncLiquidAnimation, renderUI } from "./lib/js/render.js"
 import { DROP_ML, waterTick, gameTick } from "./lib/js/game/logic.js"
 import { checkUnlocks, insertWaterUpgrades } from "./lib/js/game/water.js"
@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	gameData.explore.zones = initExplore(exploreDefs);
 	gameData.research.complete = initResearch(researchDefs);
 	requestRender();
-	requestAnimationFrame(gameTick)
-	
+	requestAnimationFrame(gameTick);
+	initAutosave();
 	checkUnlocks();
 	syncLiquidAnimation();
 	insertWaterUpgrades();
