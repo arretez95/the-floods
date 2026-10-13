@@ -3,6 +3,7 @@
 // ===============================
 import { initUpgrades, initExplore, initResearch, initAutosave } from "./lib/js/init.js"
 import { $, requestRender, syncLiquidAnimation, renderUI } from "./lib/js/render.js"
+import { msgPopup } from "./lib/js/util.js"
 import { DROP_ML, waterTick, gameTick } from "./lib/js/game/logic.js"
 import { checkUnlocks, insertWaterUpgrades } from "./lib/js/game/water.js"
 import { insertExploreAreas } from "./lib/js/game/explore.js"
@@ -87,6 +88,8 @@ function attrUp(e) {
 // ================================
 
 document.addEventListener('DOMContentLoaded', () => {
+	msgPopup("Game started")
+
 	gameData.water.upgrades = initUpgrades(upgradeDefs);
 	gameData.explore.zones = initExplore(exploreDefs);
 	gameData.research.complete = initResearch(researchDefs);
