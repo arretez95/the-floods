@@ -371,6 +371,9 @@ Sidebar
 	&.green {
 		background: #4bbd4b;
 	}
+	&.red {
+		background: #bd4f4b;
+	}
 }
 
 
