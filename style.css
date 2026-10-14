@@ -1,6 +1,7 @@
 /* Button border designs by PaperCSS */
 
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Shadows+Into+Light&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 
 :root {
 	--background: #fffef0;
@@ -32,7 +33,8 @@
 body {
 	background: var(--background);
 	color: var(--primary);
-	font-family: Arial, sans-serif;
+	font-family: Neucha, cursive;
+	font-size: 20px;
 	overflow: hidden;
 }
 
@@ -60,7 +62,7 @@ body {
 	color: #41403e;
 	cursor: pointer;
 	display: inline-block;
-	font-family: "Special Elite", system-ui;
+	font-family: Neucha, cursive;
 	font-size: 1.1vw;
 	padding: 2vw;
 	height: fit-content;
@@ -254,7 +256,7 @@ Sidebar
 	column-gap: 0.5em;
 	font-weight: 700;
 	font-size: 1em;
-	font-family: "Special Elite", system-ui;
+	font-family: Neucha, cursive;
 	padding: 1em;
 	justify-content: center;
 	line-height: 1.75rem;
@@ -270,12 +272,13 @@ Sidebar
 	-webkit-user-select: none;
 	touch-action: manipulation;
 	border-radius: 0;
-	/* clip-path: polygon(0% 0%, 80% 0, 100% 20%, 100% 100%, 0 100%) */
+	
 }
 
 .nav .fold {
 	background: linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.3) 0) no-repeat 100% 0 / 1.2em 1.2em,
 	linear-gradient(-135deg, transparent 1em, var(--sticky-1) 0);
+	clip-path: polygon(0% 0%, 80% 0, 100% 20%, 100% 100%, 0 100%);
 }
 
 .nav:focus {
@@ -366,10 +369,19 @@ Sidebar
 =================================*/
 .message-popup {
 	margin: 0 auto;
+	position: relative;
+	bottom: 5vh;
 	z-index: 99;
 	border-radius: 0.5em;
 	padding: 0.5em 1em;
-	width: fit-content;
+	box-shadow: rgba(10, 0, 0, .25) -15px -24px 25px -25px inset;
+	border-bottom-left-radius: 15px 255px;
+	border-bottom-right-radius: 225px 15px;
+	border-top-left-radius: 255px 15px;
+	border-top-right-radius: 15px 225px;
+	border: 2px solid black;
+	width: 25vw;
+	text-align: center;
 	&.green {
 		background: #4bbd4b;
 	}
@@ -406,7 +418,7 @@ Game Panel
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1.25em;
-	font-family: "Special Elite", system-ui;
+	font-family: Neucha, cursive;
 }
 
 /* =================================
@@ -1037,14 +1049,14 @@ Stats Panel
 	background: rgba(0, 0, 0, 0);
 	transition: all 0.5s ease;
 	padding: 0 1em;
-	font-size: 0.75vw;
+	font-size: 1em;
 }
 
 .inventory-item:hover .inventory-name {
 	display: block;
 }
 
-.inventory-item:hover .inventory-icon {
+.inventory-item:hover .inventory-icon, .inventory-item:hover .inventory-qty {
 	visibility: hidden;
 }
 
@@ -1187,7 +1199,7 @@ Stats Panel
 Footer
 =================================*/
 footer {
-	background: red;
+	background: #bd4f4b;
 	position: fixed;
 	left: 0;
 	right: 0;
