@@ -90,7 +90,9 @@ function attrUp(e) {
 document.addEventListener('DOMContentLoaded', () => {
 	msgPopup("Game started")
 
-	gameData.water.upgrades = initUpgrades(upgradeDefs);
+	if (Object.entries(gameData.water.upgrades).length == 0){
+		gameData.water.upgrades = initUpgrades(upgradeDefs);
+	}
 	gameData.explore.zones = initExplore(exploreDefs);
 	gameData.research.complete = initResearch(researchDefs);
 	requestRender();
