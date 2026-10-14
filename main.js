@@ -88,7 +88,7 @@ function attrUp(e) {
 // ================================
 
 document.addEventListener('DOMContentLoaded', () => {
-	msgPopup("Game started")
+	msgPopup("Game started", "green")
 
 	gameData.water.upgrades = initUpgrades(upgradeDefs);
 	gameData.explore.zones = initExplore(exploreDefs);
