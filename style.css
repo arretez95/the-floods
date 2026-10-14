@@ -1,3 +1,5 @@
+/* Button border designs by PaperCSS */
+
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Shadows+Into+Light&family=Special+Elite&display=swap');
 
 :root {
@@ -859,25 +861,26 @@ Stats Panel
 .menu {
 	display: block;
 	position: absolute;
-	top: calc(20px - var(--gap));
-	right: 1.55vw;
+	top: calc(1.5em - var(--gap));
+	right: 1vw;
 }
 
 .menu-tab {
-	padding: 0.5vw;
+	padding: 1.5em;
 	color: white;
 	border: none;
 	cursor: pointer;
 	position: relative;
 	display: block;
-	width: 40px;
+	width: 5vw;
 	height: 40px;
 	margin: 9px 0;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
 	border-bottom-left-radius: 2px;
 	font-size: 1em;
-	box-shadow: -2px 1px 3px rgba(0 0 0 / 0.2);
+	box-shadow: rgba(10, 0, 0, .25) -15px -24px 25px -25px inset;
+	border: 2px solid black;
 	cursor: pointer;
 	transform: translate(0, 0) scaleX(1);
 	transform-origin: left center;
@@ -891,25 +894,22 @@ Stats Panel
 		filter: invert(1) opacity(0.5);
 	}
 	&[data-menu="inv"] {
-		background: brown;
+		background: rgb(253, 143, 143) url("./images/backpack.png") no-repeat 100%/contain;
 	}
 	&[data-menu="equip"] {
-		background: lightblue;
+		background: lightblue url("./images/swords.png") no-repeat 100% / contain;
 	}
 	&[data-menu="help"] {
-		background: gray;
+		background: gray url("./images/question-mark.png") no-repeat 100% / contain;
 	}
 }
 
 .menu-tab.up, .menu-tab:hover {
 	text-align: left;
-	transform: translate(0, 0) scaleX(1.1);
+	transform: translate(1em, 0);
 	transform-origin: left;
 	color: white;
-	box-shadow: 0.5em 0px 0px 0px gold;
-	& img {
-		filter: invert(1) opacity(1);
-	}
+	background-position: 80%;
 }
 
 .menu-item {
@@ -920,6 +920,12 @@ Stats Panel
 	position: relative;
 	display: block;
 	height: 90%;
+	box-shadow: rgba(10, 0, 0, .25) -15px -24px 25px -25px inset;
+	border-bottom-left-radius: 15px 255px;
+	border-bottom-right-radius: 225px 15px;
+	border-top-left-radius: 255px 15px;
+	border-top-right-radius: 15px 22px;
+	border: 2px solid black;
 	background: repeating-linear-gradient(#0000 0 calc(1.2rem - 1px),#78BAF3 0 1.2rem) right bottom /100% 100%,linear-gradient(#FFCECD 0 0) 30px 0/2px 100% #F4EBDA;
 	background-repeat: no-repeat;
 	padding: 1vw;
@@ -927,7 +933,7 @@ Stats Panel
 	&:before {
 		content: '';
 		position: absolute;
-		top: 0;
+		top: 0.5em;
 		bottom: 0;
 		left: 0;
 		width: 30px;
@@ -954,7 +960,12 @@ Stats Panel
 	background: var(--sticky-1);
 	padding: 1vw;
 	transform: rotate(-1deg);
-	clip-path: polygon(0% 0%, 80% 0, 100% 20%, 100% 100%, 0 100%)
+	box-shadow: rgba(10, 0, 0, .25) -15px -24px 25px -25px inset;
+	border-bottom-left-radius: 15px 255px;
+	border-bottom-right-radius: 225px 15px;
+	border-top-left-radius: 255px 15px;
+	border-top-right-radius: 15px 225px;
+	border: 2px solid black;
 }
 
 .fold {
