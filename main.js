@@ -14,7 +14,7 @@ import { insertItemMastery } from "./lib/js/game/achievements.js"
 import { renderUnequipBtn } from "./lib/js/game/inventory.js"
 import { loadGame, saveGame, resetGame } from "./lib/js/storage.js"
 
-export let gameData = loadGame()
+export let gameData = loadGame(1)
 window.gameData = gameData
 
 // ===============================
