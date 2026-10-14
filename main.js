@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	$('#autosave').addEventListener('click', () => msgPopup('Autosave On', 'green'))
 
-	$('#reset').addEventListener('click', () => resetGame())
+	$('#reset').addEventListener('click', () => resetGame(1))
 	
 	document.querySelectorAll('.attr-add').forEach(btn => {
 		btn.addEventListener('click', attrUp);
