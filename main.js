@@ -12,7 +12,7 @@ import { insertResearchItems } from "./lib/js/game/research.js"
 import { upgradeDefs, exploreDefs, researchDefs } from "./lib/js/def.js"
 import { insertItemMastery } from "./lib/js/game/achievements.js"
 import { renderUnequipBtn } from "./lib/js/game/inventory.js"
-import { loadGame, saveGame } from "./lib/js/storage.js"
+import { loadGame, saveGame, resetGame } from "./lib/js/storage.js"
 
 export let gameData = loadGame()
 window.gameData = gameData
@@ -88,7 +88,7 @@ function attrUp(e) {
 // ================================
 
 document.addEventListener('DOMContentLoaded', () => {
-	msgPopup("Game started", "green")
+	msgPopup("Game started")
 
 	gameData.water.upgrades = initUpgrades(upgradeDefs);
 	gameData.explore.zones = initExplore(exploreDefs);
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	document.querySelectorAll('.nav.button').forEach(btn => {
 		btn.addEventListener('click', openPanel);
-	});	
+	});
 	
 	document.querySelectorAll('.menu-tab').forEach(btn => {
 		btn.addEventListener('click', openMenu)
@@ -127,6 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 
 	})
+
+	$('#autosave').addEventListener('click', () => msgPopup('Autosave On', 'green'))
+
+	$('#reset').addEventListener('click', () => resetGame())
 	
 	document.querySelectorAll('.attr-add').forEach(btn => {
 		btn.addEventListener('click', attrUp);
