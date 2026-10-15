@@ -865,7 +865,7 @@ Stats Panel
 .stats-panel {
 	max-height: 99vh;
 	max-width: 95%;
-	margin-right: 3vw;
+	margin-right: 2vw;
 	user-select: none;
 }
 
@@ -874,7 +874,7 @@ Stats Panel
 	display: block;
 	position: absolute;
 	top: calc(1.5em - var(--gap));
-	right: 1vw;
+	right: 2vw;
 }
 
 .menu-tab {
