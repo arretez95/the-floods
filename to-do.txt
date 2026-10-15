@@ -33,6 +33,7 @@ Explore:
 
 Crafting:
 	Craft equipment and accessories to improve overall performance.
+	More recipes
 	
 
 Research:
