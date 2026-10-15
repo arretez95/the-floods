@@ -64,11 +64,9 @@ body {
 	display: inline-block;
 	font-family: Neucha, cursive;
 	font-size: 1.1vw;
-	padding: 2vw;
+	padding: 1vh 1vw;
 	height: fit-content;
-	max-height: 15vh;
 	line-height: 1.1vw;
-	padding: .75rem;
 	transition: all 235ms ease-in-out;
 	border-bottom-left-radius: 15px 255px;
 	border-bottom-right-radius: 225px 15px;
@@ -257,7 +255,7 @@ Sidebar
 	font-weight: 700;
 	font-size: 1em;
 	font-family: Neucha, cursive;
-	padding: 1em;
+	padding: 1vh 1vw;
 	justify-content: center;
 	line-height: 1.75rem;
 	position: relative;
@@ -275,11 +273,10 @@ Sidebar
 	
 }
 
-.nav .fold {
+/* .nav .fold {
 	background: linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.3) 0) no-repeat 100% 0 / 1.2em 1.2em,
 	linear-gradient(-135deg, transparent 1em, var(--sticky-1) 0);
-	clip-path: polygon(0% 0%, 80% 0, 100% 20%, 100% 100%, 0 100%);
-}
+} */
 
 .nav:focus {
 	outline: 0;
@@ -875,53 +872,38 @@ Stats Panel
 	position: absolute;
 	top: calc(1.5em - var(--gap));
 	right: 2vw;
+	overflow:visible;
 }
 
 .menu-tab {
-	padding: 1.5em;
 	color: white;
-	border: none;
 	cursor: pointer;
 	position: relative;
 	display: block;
 	width: 5vw;
-	height: 40px;
-	margin: 9px 0;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	border-bottom-left-radius: 2px;
-	font-size: 1em;
+	height: 3vw;
+	margin: 9px -1vw;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
 	box-shadow: rgba(10, 0, 0, .25) -15px -24px 25px -25px inset;
 	border: 2px solid black;
-	cursor: pointer;
-	transform: translate(0, 0) scaleX(1);
 	transform-origin: left center;
-	filter: brightness(90%);
-	transition-property: transform filter;
 	transition-duration: 0.2s;
 	transition-timing-function: cubic-bezier(1, 1, 0.5, 1.3333);
-	& img {
-		width: 20px;
-		height: 20px;
-		filter: invert(1) opacity(0.5);
-	}
 	&[data-menu="inv"] {
-		background: rgb(253, 143, 143) url("./images/backpack.png") no-repeat 100%/contain;
+		background: rgb(253, 143, 143) url("./images/backpack.png") no-repeat right/50%;
 	}
 	&[data-menu="equip"] {
-		background: lightblue url("./images/swords.png") no-repeat 100% / contain;
+		background: lightblue url("./images/swords.png") no-repeat right / 50%;
 	}
 	&[data-menu="help"] {
-		background: gray url("./images/question-mark.png") no-repeat 100% / contain;
+		background: gray url("./images/question-mark.png") no-repeat right / 50%;
 	}
 }
 
 .menu-tab.up, .menu-tab:hover {
-	text-align: left;
-	transform: translate(2em, 0);
-	transform-origin: left;
+	transform: translate(0.75vw, 0);
 	color: white;
-	background-position: 80%;
 }
 
 .menu-item {
@@ -932,6 +914,7 @@ Stats Panel
 	position: relative;
 	display: block;
 	height: 90%;
+	font-size: 0.8em;
 	box-shadow: rgba(10, 0, 0, .25) -15px -24px 25px -25px inset;
 	border-bottom-left-radius: 15px 255px;
 	border-bottom-right-radius: 225px 15px;
@@ -980,11 +963,11 @@ Stats Panel
 	border: 2px solid black;
 }
 
-.fold {
+/* .fold {
 	background: 
 	linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.3) 0) no-repeat 100% 0 / 1.2em 1.2em,
 	linear-gradient(-135deg, transparent 1em, var(--sticky-1) 0);
-}
+} */
 
 .inventory-item:nth-child(even) {
 	background: var(--sticky-3);
@@ -994,12 +977,12 @@ Stats Panel
 	}
 }
 
-.fold:nth-child(even) {
+/* .fold:nth-child(even) {
 	background: 
 	linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.3) 0) no-repeat 100% 0 / 1.2em 1.2em,
 	linear-gradient(-135deg, transparent 1em, var(--sticky-3) 0);
 	transform: rotate(3deg);
-}
+} */
 
 .inventory-item:nth-child(3n) {
 	background: var(--sticky-4);
