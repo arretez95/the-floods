@@ -417,7 +417,7 @@ Game Panel
 .tab-panel.active {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 1.25em;
+	gap: 1em;
 	font-family: Neucha, cursive;
 }
 
@@ -918,7 +918,7 @@ Stats Panel
 
 .menu-tab.up, .menu-tab:hover {
 	text-align: left;
-	transform: translate(1em, 0);
+	transform: translate(2em, 0);
 	transform-origin: left;
 	color: white;
 	background-position: 80%;
