@@ -919,7 +919,7 @@ Stats Panel
 	border-bottom-left-radius: 15px 255px;
 	border-bottom-right-radius: 225px 15px;
 	border-top-left-radius: 255px 15px;
-	border-top-right-radius: 15px 22px;
+	border-top-right-radius: 115px 1px;
 	border: 2px solid black;
 	background: repeating-linear-gradient(#0000 0 calc(1.2rem - 1px),#78BAF3 0 1.2rem) right bottom /100% 100%,linear-gradient(#FFCECD 0 0) 30px 0/2px 100% #F4EBDA;
 	background-repeat: no-repeat;
