@@ -5,21 +5,17 @@ Inventory:
 	Turn stats panel into equipment/inventory information
 
 Water:
-	in upgradeDefs['drippy-faucet'], remove state.tickSpeed = 2000
-	Add the following under purchaseUpgrade():
-	if ( def['drippy-faucet'] === 1 ) { gameData.water.tickSpeed = 2000; }
-
-	Figure out how to get modifier upgrades to not overwrite each other (loose-valve, rust-buildup)
-	
+	Collect water into containers for crafting.
 	Generate more water per upgrade.
 	Water level boosts water gain? Chance for instant tick?
+	Upgrade boosts other skills.
 	Further upgrades can be unlocked by getting more water, exploring for recipes, crafting and equipping items, progressing in jobs, etc.
 
 Explore:
 	Similar to FarmRPG: click to explore further into region, limited by stamina.
-	1 stamina = 1 step = 1 explore XP. 100,000 steps to complete area.
 	Stamina regenerates over time or can be refilled with crafted items.
-	Max stamina improved by research.
+	Max stamina improved by research and other upgrades.
+	Unlock explore zones based on certain conditions (explore level, other skill level, find item, etc)
 	Exploring provides materials for crafting.
 	May increase water tick rate temporarily.
 	Chance to fail and lose water.
